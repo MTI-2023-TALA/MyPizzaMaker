@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using backend.DataAccess.Interfaces;
 
 namespace backend.Controllers
 {
@@ -7,22 +8,24 @@ namespace backend.Controllers
     public class IngredientController : ControllerBase
     {
         private readonly ILogger<IngredientController> _logger;
+        private readonly IIngredientRepository _ingredientRepository;
 
-        public IngredientController(ILogger<IngredientController> logger)
+        public IngredientController(IIngredientRepository ingredientRepository, ILogger<IngredientController> logger)
         {
+            _ingredientRepository = ingredientRepository;
             _logger = logger;
         }
 
         [HttpGet]
-        public void GetAllIngredient()
+        public IActionResult GetAllIngredient()
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(_ingredientRepository.GetAllIngredient());
         }
 
         [HttpGet("{category}")]
-        public void GetIngredientWithCategory(string catagory)
+        public IActionResult GetIngredientWithCategory(string category)
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(_ingredientRepository.GetIngredientWithCategory(category));
         }
 
         [HttpPost]

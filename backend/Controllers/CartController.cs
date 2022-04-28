@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using backend.DataAccess.Interfaces;
 
 namespace backend.Controllers
 {
@@ -7,28 +8,30 @@ namespace backend.Controllers
     public class CartController : ControllerBase
     {
         private readonly ILogger<CartController> _logger;
+        private readonly ICartRepository _cartRepository;
 
-        public CartController(ILogger<CartController> logger)
+        public CartController(ICartRepository cartRepository, ILogger<CartController> logger)
         {
+            _cartRepository = cartRepository;
             _logger = logger;
         }
 
         [HttpGet]
-        public void GetAllCarts()
+        public IActionResult GetAllCarts()
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(_cartRepository.GetAllCarts());
         }
 
         [HttpGet("{id:long}")]
-        public void GetCart(long id)
+        public IActionResult GetCart(long id)
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(_cartRepository.GetCart(id));
         }
 
         [HttpPost]
         public void CreateCart()
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            
         }
 
         [HttpPatch("{id:long}")]
@@ -44,9 +47,9 @@ namespace backend.Controllers
         }
 
         [HttpGet("today")]
-        public void GetTodayCarts()
+        public IActionResult GetTodayCarts()
         {
-
+            return Ok(_cartRepository.GetTodayCarts());
         }
     }
 }

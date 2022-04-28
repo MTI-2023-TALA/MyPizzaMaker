@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using backend.DataAccess.Interfaces;
 
 namespace backend.Controllers
 {
@@ -7,28 +8,31 @@ namespace backend.Controllers
     public class StatsController : ControllerBase
     {
         private readonly ILogger<StatsController> _logger;
+        private readonly ICartRepository _cartRepository;
 
-        public StatsController(ILogger<StatsController> logger)
+        public StatsController(ICartRepository cartRepository, ILogger<StatsController> logger)
         {
             _logger = logger;
+            _cartRepository = cartRepository;
         }
 
         [HttpGet("today")]
-        public void GetTodayStats()
+        public IActionResult GetTodayStats()
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(_cartRepository.GetTodayStats());
         }
 
         [HttpGet("weekly")]
-        public void GetWeeklyStats()
+        public IActionResult GetWeeklyStats()
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(_cartRepository.GetWeeklyStats());
+
         }
 
         [HttpGet("monthly")]
-        public void GetMonthly()
+        public IActionResult GetMonthlyStats()
         {
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(_cartRepository.GetMonthlyStats());
         }
     }
 }
