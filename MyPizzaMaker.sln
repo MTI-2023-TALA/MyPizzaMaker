@@ -9,6 +9,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PizzaMakerDatabase", "Pizza
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackOffice", "BackOffice\BackOffice.csproj", "{DE94B681-54B6-462F-97B9-F2FFBE4A67DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontOffice", "FrontOffice\FrontOffice.csproj", "{B50405B9-9112-4807-AFD2-A211AB076CFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,12 @@ Global
 		{DE94B681-54B6-462F-97B9-F2FFBE4A67DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE94B681-54B6-462F-97B9-F2FFBE4A67DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE94B681-54B6-462F-97B9-F2FFBE4A67DB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B50405B9-9112-4807-AFD2-A211AB076CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50405B9-9112-4807-AFD2-A211AB076CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50405B9-9112-4807-AFD2-A211AB076CFA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B50405B9-9112-4807-AFD2-A211AB076CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50405B9-9112-4807-AFD2-A211AB076CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B50405B9-9112-4807-AFD2-A211AB076CFA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
