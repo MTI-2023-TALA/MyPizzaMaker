@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace backend.DataAccess
+namespace backend.DataAccess.EfModels
 {
     public partial class Cart
     {
