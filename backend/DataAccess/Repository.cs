@@ -5,7 +5,7 @@ namespace backend.DataAccess
 {
     public class Repository<DBEntity, ModelEntity> : IRepository<DBEntity, ModelEntity>
         where DBEntity : class, new()
-        where ModelEntity : class, Dto.IObjectWithId, new()
+        where ModelEntity : class, Dbo.IObjectWithId, new()
     {
         private DbSet<DBEntity> _set;
         protected EfModels.myPizzaMakerContext _context;
@@ -20,7 +20,7 @@ namespace backend.DataAccess
             _set = _context.Set<DBEntity>();
         }
 
-        public virtual async Task<ModelEntity> GetOne(long id)
+        public virtual async Task<ModelEntity> GetOne(int id)
         {
             DBEntity dbEntity = await _set.FindAsync(id);
             if (dbEntity == null)
@@ -60,7 +60,7 @@ namespace backend.DataAccess
             {
                 await _context.SaveChangesAsync();
                 ModelEntity newEntity = _mapper.Map<ModelEntity>(dbEntity);
-                return entity;
+                return newEntity;
             } catch (Exception e)
             {
                 _logger.LogError("Unable to insert data to the database", e);
@@ -95,7 +95,7 @@ namespace backend.DataAccess
             }
         }
 
-        public async Task<bool> Delete(long id)
+        public async Task<bool> Delete(int id)
         {
             DBEntity dbEntity = _set.Find(id);
 

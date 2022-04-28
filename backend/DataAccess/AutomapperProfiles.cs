@@ -6,20 +6,25 @@ namespace backend.DataAccess
     {
         public AutomapperProfiles()
         {
-            CreateMap<Dto.Cart, EfModels.Cart>();
-            CreateMap<EfModels.Cart, Dto.Cart>();
+            CreateMap<Dbo.Cart, EfModels.Cart>();
+            CreateMap<EfModels.Cart, Dbo.Cart>();
 
-            CreateMap<Dto.Pizza, EfModels.Pizza>();
-            CreateMap<EfModels.Pizza, Dto.Pizza>();
 
-            CreateMap<Dto.Ingredient, EfModels.Ingredient>();
-            CreateMap<EfModels.Ingredient, Dto.Ingredient>();
+            CreateMap<Dbo.Pizza, EfModels.Pizza>();
+            CreateMap<EfModels.Pizza, Dbo.Pizza>();
 
-            CreateMap<Dto.CartsPizza, EfModels.CartsPizza>();
-            CreateMap<EfModels.CartsPizza, Dto.CartsPizza>();
+            CreateMap<Dbo.Ingredient, EfModels.Ingredient>();
+            CreateMap<EfModels.Ingredient, Dbo.Ingredient>();
+            CreateMap<Dto.Ingredient, Dbo.Ingredient>();
+            CreateMap<Dbo.Ingredient, Dto.Ingredient>();
 
-            CreateMap<Dto.PizzasIngredient, EfModels.PizzasIngredient>();
-            CreateMap<EfModels.PizzasIngredient, Dto.PizzasIngredient>();
+
+
+            CreateMap<Dbo.CartsPizza, EfModels.CartsPizza>();
+            CreateMap<EfModels.CartsPizza, Dbo.CartsPizza>();
+
+            CreateMap<Dbo.PizzasIngredient, EfModels.PizzasIngredient>();
+            CreateMap<EfModels.PizzasIngredient, Dbo.PizzasIngredient>();
         }
     }
 }

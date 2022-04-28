@@ -4,22 +4,22 @@ using backend.DataAccess.Interfaces;
 
 namespace backend.DataAccess
 {
-    public class IngredientRepository : Repository<EfModels.Ingredient, Dto.Ingredient>, IIngredientRepository
+    public class IngredientRepository : Repository<EfModels.Ingredient, Dbo.Ingredient>, IIngredientRepository
     {
         public IngredientRepository(myPizzaMakerContext context, ILogger logger, IMapper mapper) : base(context, logger, mapper)
         {
         }
 
-        public List<Dto.Ingredient> GetAllIngredient()
+        public List<Dbo.Ingredient> GetAllIngredient()
         {
             var result = _context.Ingredients.ToList();
-            return _mapper.Map<List<Dto.Ingredient>>(result);
+            return _mapper.Map<List<Dbo.Ingredient>>(result);
         }
 
-        public List<Dto.Ingredient> GetIngredientWithCategory(string category)
+        public List<Dbo.Ingredient> GetIngredientWithCategory(string category)
         {
             var result = _context.Ingredients.Where(i => i.Category == category);
-            return _mapper.Map<List<Dto.Ingredient>>(result);
+            return _mapper.Map<List<Dbo.Ingredient>>(result);
         }
     }
 }

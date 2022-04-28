@@ -1,8 +1,8 @@
 ﻿namespace backend.DataAccess.Interfaces
 {
-    public interface IPizzaRepository : DataAccess.IRepository<EfModels.Pizza, Dto.Pizza>
+    public interface IPizzaRepository : DataAccess.IRepository<EfModels.Pizza, Dbo.Pizza>
     {
-        public List<Dto.Pizza> GetAllPizzas();
-        public Dto.Pizza GetPizza(long pizzaId);
+        public List<Dbo.Pizza> GetAllPizzas();
+        public Dbo.Pizza GetPizza(long pizzaId);
     }
 }

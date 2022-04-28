@@ -1,4 +1,4 @@
-﻿namespace backend.Dto
+﻿namespace backend.Dbo
 {
     public class PizzasIngredient
     {

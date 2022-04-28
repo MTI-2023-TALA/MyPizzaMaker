@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using backend.DataAccess.Interfaces;
 using backend.Dto;
+using backend.Service.Interfaces;
 
 namespace backend.Controllers
 {
@@ -9,53 +10,42 @@ namespace backend.Controllers
     public class IngredientController : ControllerBase
     {
         private readonly ILogger<IngredientController> _logger;
-        private readonly IIngredientRepository _ingredientRepository;
+        private readonly IIngredientService _ingredientService;
 
-        public IngredientController(IIngredientRepository ingredientRepository, ILogger<IngredientController> logger)
+        public IngredientController(IIngredientService ingredientService, ILogger<IngredientController> logger)
         {
-            _ingredientRepository = ingredientRepository;
             _logger = logger;
+            _ingredientService = ingredientService;
         }
 
         [HttpGet]
-        public IActionResult GetAllIngredient()
+        public async Task<IActionResult> GetAllIngredient()
         {
-            return Ok(_ingredientRepository.GetAllIngredient());
+            return  Ok(await _ingredientService.GetAllIngredient());
         }
 
         [HttpGet("{category}")]
-        public IActionResult GetIngredientWithCategory(string category)
+        public async Task<IActionResult> GetIngredientWithCategory(string category)
         {
-            return Ok(_ingredientRepository.GetIngredientWithCategory(category));
+            return Ok(await _ingredientService.GetByCategory(category));
         }
 
         [HttpPost]
         public async Task<Ingredient> CreateIngredient([FromBody] CreateIngredient createIngredient)
         {
-            Ingredient ingredient = new Ingredient();
-            ingredient.Category = createIngredient.Category;
-            ingredient.Name = createIngredient.Name;
-            ingredient.IsAvalaible = createIngredient.IsAvalaible;
-
-            return await _ingredientRepository.Insert(ingredient);
+            return await _ingredientService.CreateIngredient(createIngredient);
         }
 
-        [HttpPatch("{id:long}")]
+        [HttpPatch("{id:int}")]
         public async Task<Ingredient> UpdateIngredient(int id, [FromBody] UpdateIngredient updateIngredient)
         {
-            Ingredient ingredient = new Ingredient();
-            ingredient.Id = id;
-            ingredient.Name = updateIngredient.Name;
-            ingredient.IsAvalaible = (bool)updateIngredient.IsAvalaible;
-            ingredient.Category = updateIngredient.Category;
-
-            return await _ingredientRepository.Update(ingredient);
+            return await _ingredientService.UpdateIngredient(id, updateIngredient);
         }
 
-        [HttpDelete("{id:long}")]
-        public async Task<bool> DeleteIngredient(long id)
+        [HttpDelete("{id:int}")]
+        public async Task<bool> DeleteIngredient(int id)
         {
-            return await _ingredientRepository.Delete(id);
+            return await _ingredientService.DeleteIngredient(id);
         }
     }
 }

@@ -4,29 +4,29 @@ using backend.DataAccess.Interfaces;
 
 namespace backend.DataAccess
 {
-    public class CartRepository : Repository<EfModels.Cart, Dto.Cart>, ICartRepository
+    public class CartRepository : Repository<EfModels.Cart, Dbo.Cart>, ICartRepository
     {
         public CartRepository(myPizzaMakerContext context, ILogger logger, IMapper mapper) : base(context, logger, mapper)
         {
         }
 
-        public List<Dto.Cart> GetAllCarts()
+        public List<Dbo.Cart> GetAllCarts()
         {
             var result = _context.Carts.ToList();
-            return _mapper.Map<List<Dto.Cart>>(result);
+            return _mapper.Map<List<Dbo.Cart>>(result);
         }
 
-        public Dto.Cart GetCart(long cartId)
+        public Dbo.Cart GetCart(long cartId)
         {
             var result = _context.Carts.Where(c => c.Id == cartId);
-            return _mapper.Map<Dto.Cart>(result);
+            return _mapper.Map<Dbo.Cart>(result);
         }
 
-        public List<Dto.Cart> GetTodayCarts()
+        public List<Dbo.Cart> GetTodayCarts()
         {
             DateTime today = DateTime.Today;
             var result = _context.Carts.Where(c => c.Date.Date == today.Date);
-            return _mapper.Map<List<Dto.Cart>>(result);
+            return _mapper.Map<List<Dbo.Cart>>(result);
         }
 
         public int GetTodayStats()
@@ -39,7 +39,7 @@ namespace backend.DataAccess
         {
             DateTime today = DateTime.Today;
             var result = _context.Carts.Where(c => DatesAreInTheSameWeek(c.Date, today));
-            List<Dto.Cart> res = _mapper.Map<List<Dto.Cart>>(result);
+            List<Dbo.Cart> res = _mapper.Map<List<Dbo.Cart>>(result);
             return res.Count;
         }
 
@@ -47,7 +47,7 @@ namespace backend.DataAccess
         {
             DateTime today = DateTime.Today;
             var result = _context.Carts.Where(c => c.Date.Month == today.Month);
-            List<Dto.Cart> res = _mapper.Map<List<Dto.Cart>>(result);
+            List<Dbo.Cart> res = _mapper.Map<List<Dbo.Cart>>(result);
             return res.Count;
         }
 

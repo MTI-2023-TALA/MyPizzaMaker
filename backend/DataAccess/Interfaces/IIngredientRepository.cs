@@ -1,8 +1,8 @@
 ﻿namespace backend.DataAccess.Interfaces
 {
-    public interface IIngredientRepository : DataAccess.IRepository<EfModels.Ingredient, Dto.Ingredient>
+    public interface IIngredientRepository : DataAccess.IRepository<EfModels.Ingredient, Dbo.Ingredient>
     {
-        public List<Dto.Ingredient> GetAllIngredient();
-        public List<Dto.Ingredient> GetIngredientWithCategory(string category);
+        public List<Dbo.Ingredient> GetAllIngredient();
+        public List<Dbo.Ingredient> GetIngredientWithCategory(string category);
     }
 }
