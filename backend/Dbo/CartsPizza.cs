@@ -2,7 +2,7 @@
 {
     public class CartsPizza
     {
-        public long PizzaId { get; set; }
+        public int PizzaId { get; set; }
         public int CartId { get; set; }
 
         public virtual Cart Cart { get; set; }

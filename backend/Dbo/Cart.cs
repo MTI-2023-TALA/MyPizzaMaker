@@ -2,7 +2,7 @@
 {
     public class Cart: IObjectWithId
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Status { get; set; }
         public DateTime Date { get; set; }
     }
