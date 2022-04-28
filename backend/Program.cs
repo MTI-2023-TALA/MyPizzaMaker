@@ -1,4 +1,4 @@
-using AutoMapper;
+using AutoMapper; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(backend.DataAccess.AutomapperProfiles));
+builder.Services.AddTransient<backend.DataAccess.Interfaces.ICartRepository, backend.DataAccess.CartRepository>();
+builder.Services.AddTransient<backend.DataAccess.Interfaces.IIngredientRepository, backend.DataAccess.IngredientRepository>();
+builder.Services.AddTransient<backend.DataAccess.Interfaces.IPizzaRepository, backend.DataAccess.PizzaRepository>();
+
 
 var app = builder.Build();
 

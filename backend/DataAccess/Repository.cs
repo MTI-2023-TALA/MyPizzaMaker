@@ -47,7 +47,7 @@ namespace backend.DataAccess
                 return _mapper.Map<ModelEntity[]>(query);
             } catch (Exception e)
             {
-                _logger.LogError("Unable to get data from the Datanase", e);
+                _logger.LogError("Unable to get data from the Datadase", e);
                 return null;
             }
         }
