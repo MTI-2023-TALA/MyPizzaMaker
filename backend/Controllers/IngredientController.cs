@@ -19,8 +19,8 @@ namespace backend.Controllers
             _logger.Log(LogLevel.Information, "Not implemented");
         }
 
-        [HttpGet("{categorie}")]
-        public void GetIngredientWithCategorie(string categorie)
+        [HttpGet("{category}")]
+        public void GetIngredientWithCategory(string catagory)
         {
             _logger.Log(LogLevel.Information, "Not implemented");
         }

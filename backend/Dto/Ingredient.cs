@@ -4,8 +4,8 @@
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public string ImgPath { get; set; }
+        public string? ImagePath { get; set; }
         public bool IsAvalaible { get; set; }
-        public string Categorie { get; set; }
+        public string Category { get; set; }
     }
 }
