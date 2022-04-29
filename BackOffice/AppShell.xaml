@@ -5,10 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:BackOffice"
     Shell.FlyoutBehavior="Disabled">
+    <Shell.Resources />
+
+    <Shell.FlyoutHeader>
+        <Grid>
+            <Label Text="Hello !"></Label>
+        </Grid>
+    </Shell.FlyoutHeader>
 
     <ShellContent
-        Title="Hello, World!"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+        Title="Ingrédient"
+        ContentTemplate="{DataTemplate local:IngredientPage}"
+        Route="IngredientPage" />
+    <ShellContent
+        Title="Commandes"
+        ContentTemplate="{DataTemplate local:CommandPage}"
+        Route="CommandPage" />
+    <ShellContent
+        Title="Statistique"
+        ContentTemplate="{DataTemplate local:StatPage}"
+        Route="StatPage" />
 </Shell>
