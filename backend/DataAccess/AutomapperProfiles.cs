@@ -8,6 +8,8 @@ namespace backend.DataAccess
         {
             CreateMap<Dbo.Cart, EfModels.Cart>();
             CreateMap<EfModels.Cart, Dbo.Cart>();
+            CreateMap<Dto.Cart, Dbo.Cart>();
+            CreateMap<Dbo.Cart, Dto.Cart>();
 
 
             CreateMap<Dbo.Pizza, EfModels.Pizza>();

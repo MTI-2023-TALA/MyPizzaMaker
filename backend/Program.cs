@@ -22,7 +22,7 @@ builder.Services.AddTransient<backend.DataAccess.Interfaces.ICartRepository, bac
 builder.Services.AddTransient<backend.DataAccess.Interfaces.IIngredientRepository, backend.DataAccess.IngredientRepository>();
 builder.Services.AddTransient<backend.DataAccess.Interfaces.IPizzaRepository, backend.DataAccess.PizzaRepository>();
 builder.Services.AddTransient<backend.Service.Interfaces.IIngredientService, backend.Service.IngredientService>();
-
+builder.Services.AddTransient<backend.Service.Interfaces.ICartService, backend.Service.CartService>();
 
 
 var app = builder.Build();
