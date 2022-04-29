@@ -16,12 +16,6 @@ namespace backend.DataAccess
             return _mapper.Map<List<Dbo.Cart>>(result);
         }
 
-        public Dbo.Cart GetCart(long cartId)
-        {
-            var result = _context.Carts.Where(c => c.Id == cartId);
-            return _mapper.Map<Dbo.Cart>(result);
-        }
-
         public List<Dbo.Cart> GetTodayCarts()
         {
             DateTime today = DateTime.Today;
