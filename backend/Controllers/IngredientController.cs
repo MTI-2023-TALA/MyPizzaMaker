@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using backend.DataAccess.Interfaces;
-using backend.Dto;
 using backend.Service.Interfaces;
+using backend.Dto;
 
 namespace backend.Controllers
 {
@@ -14,14 +14,14 @@ namespace backend.Controllers
 
         public IngredientController(IIngredientService ingredientService, ILogger<IngredientController> logger)
         {
-            _logger = logger;
             _ingredientService = ingredientService;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllIngredient()
         {
-            return  Ok(await _ingredientService.GetAllIngredient());
+            return Ok(await _ingredientService.GetAllIngredient());
         }
 
         [HttpGet("{category}")]
