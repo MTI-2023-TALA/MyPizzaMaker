@@ -18,7 +18,7 @@ namespace backend.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Dto.Ingredient>> GetAllIngredient()
+        public async Task<List<Dto.Ingredient>> GetAllIngredient()
         {
             List<Dbo.Ingredient> ingredients = _ingredientRepository.GetAllIngredient();
             return _mapper.Map<List<Dto.Ingredient>>(ingredients);
@@ -39,9 +39,9 @@ namespace backend.Service
         public async Task<Dto.Ingredient> CreateIngredient(Dto.CreateIngredient createIngredient)
         {
             Dbo.Ingredient ingredient = new Dbo.Ingredient();
-            ingredient.Category = createIngredient.Category;
             ingredient.Name = createIngredient.Name;
-            ingredient.IsAvailable = createIngredient.IsAvalaible;
+            ingredient.IsAvailable = createIngredient.IsAvailable;
+            ingredient.Category = createIngredient.Category;
 
             var result = await _ingredientRepository.Insert(ingredient);
             return _mapper.Map<Dto.Ingredient>(result);
@@ -52,7 +52,7 @@ namespace backend.Service
             Dbo.Ingredient ingredient = new Dbo.Ingredient();
             ingredient.Id = id;
             ingredient.Name = updateIngredient.Name;
-            ingredient.IsAvailable = (bool)updateIngredient.IsAvalaible;
+            ingredient.IsAvailable = (bool)updateIngredient.IsAvailable;
             ingredient.Category = updateIngredient.Category;
 
             var result = await _ingredientRepository.Update(ingredient);
