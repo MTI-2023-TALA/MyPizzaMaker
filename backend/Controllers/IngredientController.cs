@@ -24,6 +24,12 @@ namespace backend.Controllers
             return Ok(await _ingredientService.GetAllIngredient());
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetIngredient(int id)
+        {
+            return Ok(await _ingredientService.GetIngredient(id));
+        }
+
         [HttpGet("{category}")]
         public async Task<IActionResult> GetIngredientWithCategory(string category)
         {

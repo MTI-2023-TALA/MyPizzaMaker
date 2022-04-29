@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using backend.DataAccess.Interfaces;
+using backend.Service.Interfaces;
+using backend.Dto;
 
 namespace backend.Controllers
 {
@@ -8,48 +10,49 @@ namespace backend.Controllers
     public class CartController : ControllerBase
     {
         private readonly ILogger<CartController> _logger;
-        private readonly ICartRepository _cartRepository;
+        private readonly ICartService _cartService;
 
-        public CartController(ICartRepository cartRepository, ILogger<CartController> logger)
+        public CartController(ICartService cartService, ILogger<CartController> logger)
         {
-            _cartRepository = cartRepository;
+            _cartService = cartService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IActionResult GetAllCarts()
+        public async Task<IActionResult> GetAllCarts()
         {
-            return Ok(_cartRepository.GetAllCarts());
+            return Ok(await _cartService.GetAllCarts());
         }
 
-        [HttpGet("{id:long}")]
-        public IActionResult GetCart(long id)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetCart(int id)
         {
-            return Ok(_cartRepository.GetCart(id));
+            return Ok(await _cartService.GetCart(id));
         }
 
         [HttpPost]
-        public void CreateCart()
+        public async Task<Cart> CreateCart([FromBody] CreateCart createCart)
         {
-            
+            return await _cartService.CreateCart(createCart);
         }
 
-        [HttpPatch("{id:long}")]
-        public void UpdateCart(long id)
+        [HttpPatch("{id:int}")]
+        public async Task<Cart> UpdateCart(int id, [FromBody] UpdateCart updateCart)
         {
+            return await _cartService.UpdateCart(id, updateCart);
+        }
+
+        [HttpPost("{id:int}")]
+        public async void AddPizzaToCart(int id)
+        {
+            // TODO: to be done with cart adding system
             _logger.Log(LogLevel.Information, "Not implemented");
         }
 
-        [HttpPost("{id:long}")]
-        public void AddPizzaToCart(long id)
-        {
-
-        }
-
         [HttpGet("today")]
-        public IActionResult GetTodayCarts()
+        public async Task<IActionResult> GetTodayCarts()
         {
-            return Ok(_cartRepository.GetTodayCarts());
+            return Ok(await _cartService.GetTodayCarts());
         }
     }
 }
