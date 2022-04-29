@@ -41,7 +41,7 @@ namespace backend.Service
             Dbo.Ingredient ingredient = new Dbo.Ingredient();
             ingredient.Category = createIngredient.Category;
             ingredient.Name = createIngredient.Name;
-            ingredient.IsAvalaible = createIngredient.IsAvalaible;
+            ingredient.IsAvailable = createIngredient.IsAvalaible;
 
             var result = await _ingredientRepository.Insert(ingredient);
             return _mapper.Map<Dto.Ingredient>(result);
@@ -52,7 +52,7 @@ namespace backend.Service
             Dbo.Ingredient ingredient = new Dbo.Ingredient();
             ingredient.Id = id;
             ingredient.Name = updateIngredient.Name;
-            ingredient.IsAvalaible = (bool)updateIngredient.IsAvalaible;
+            ingredient.IsAvailable = (bool)updateIngredient.IsAvalaible;
             ingredient.Category = updateIngredient.Category;
 
             var result = await _ingredientRepository.Update(ingredient);
