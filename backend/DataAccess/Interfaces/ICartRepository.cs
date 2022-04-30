@@ -4,7 +4,7 @@
     {
         public List<Dbo.Cart> GetAllCarts();
         public List<Dbo.Cart> GetTodayCarts();
-        public int GetTodayStats();
+        public int GetDailyStats();
         public int GetWeeklyStats();
         public int GetMonthlyStats();
     }

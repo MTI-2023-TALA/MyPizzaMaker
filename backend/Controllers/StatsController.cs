@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using backend.DataAccess.Interfaces;
+using backend.Service.Interfaces;
 
 namespace backend.Controllers
 {
@@ -8,31 +8,31 @@ namespace backend.Controllers
     public class StatsController : ControllerBase
     {
         private readonly ILogger<StatsController> _logger;
-        private readonly ICartRepository _cartRepository;
+        private readonly IStatsService _statsService;
 
-        public StatsController(ICartRepository cartRepository, ILogger<StatsController> logger)
+        public StatsController(IStatsService statsService, ILogger<StatsController> logger)
         {
+            _statsService = statsService;
             _logger = logger;
-            _cartRepository = cartRepository;
         }
 
-        [HttpGet("today")]
-        public IActionResult GetTodayStats()
+        [HttpGet("daily")]
+        public async Task<IActionResult> GetDailyStats()
         {
-            return Ok(_cartRepository.GetTodayStats());
+            return Ok(await _statsService.GetDailyStats());
         }
 
         [HttpGet("weekly")]
-        public IActionResult GetWeeklyStats()
+        public async Task<IActionResult> GetWeeklyStats()
         {
-            return Ok(_cartRepository.GetWeeklyStats());
+            return Ok(await _statsService.GetWeeklyStats());
 
         }
 
         [HttpGet("monthly")]
-        public IActionResult GetMonthlyStats()
+        public async Task<IActionResult> GetMonthlyStats()
         {
-            return Ok(_cartRepository.GetMonthlyStats());
+            return Ok(await _statsService.GetMonthlyStats());
         }
     }
 }

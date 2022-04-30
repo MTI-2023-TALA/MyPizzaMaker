@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using backend.DataAccess.Interfaces;
 using backend.Service.Interfaces;
 using backend.Dto;
 

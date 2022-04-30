@@ -23,7 +23,7 @@ namespace backend.DataAccess
             return _mapper.Map<List<Dbo.Cart>>(result);
         }
 
-        public int GetTodayStats()
+        public int GetDailyStats()
         {
             var result = GetTodayCarts();
             return result.Count;
@@ -31,26 +31,15 @@ namespace backend.DataAccess
 
         public int GetWeeklyStats()
         {
-            DateTime today = DateTime.Today;
-            var result = _context.Carts.Where(c => DatesAreInTheSameWeek(c.Date, today));
-            List<Dbo.Cart> res = _mapper.Map<List<Dbo.Cart>>(result);
-            return res.Count;
+            var result = _context.Carts.Where(c => c.Date.DayOfYear - DateTime.Today.DayOfYear <= 7);
+            return result.Count();
         }
 
         public int GetMonthlyStats()
         {
             DateTime today = DateTime.Today;
-            var result = _context.Carts.Where(c => c.Date.Month == today.Month);
-            List<Dbo.Cart> res = _mapper.Map<List<Dbo.Cart>>(result);
-            return res.Count;
-        }
-
-        private bool DatesAreInTheSameWeek(DateTime date1, DateTime date2)
-        {
-            var cal = System.Globalization.DateTimeFormatInfo.CurrentInfo.Calendar;
-            var d1 = date1.Date.AddDays(-1 * (int)cal.GetDayOfWeek(date1));
-            var d2 = date2.Date.AddDays(-1 * (int)cal.GetDayOfWeek(date2));
-            return d1 == d2;
+            var result = _context.Carts.Where(c => c.Date.Month == today.Month && c.Date.Year == today.Year);
+            return result.Count();
         }
     }
 }
