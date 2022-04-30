@@ -20,7 +20,8 @@ namespace backend.DataAccess
             CreateMap<Dto.Ingredient, Dbo.Ingredient>();
             CreateMap<Dbo.Ingredient, Dto.Ingredient>();
 
-
+            CreateMap<Dbo.Ingredient, Dto.CartPizzaIngredient.Ingredient> ();
+            CreateMap<Dto.CartPizzaIngredient.Ingredient, Dbo.Ingredient> ();
 
             CreateMap<Dbo.CartsPizza, EfModels.CartsPizza>();
             CreateMap<EfModels.CartsPizza, Dbo.CartsPizza>();

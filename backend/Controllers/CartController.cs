@@ -42,10 +42,9 @@ namespace backend.Controllers
         }
 
         [HttpPost("{id:int}")]
-        public async void AddPizzaToCart(int id)
+        public async Task<IActionResult> AddPizzaToCart(int id, [FromBody] AddPizza addPizza)
         {
-            // TODO: to be done with cart adding system
-            _logger.Log(LogLevel.Information, "Not implemented");
+            return Ok(await _cartService.AddPizzaToCart(id, addPizza));
         }
 
         [HttpGet("today")]

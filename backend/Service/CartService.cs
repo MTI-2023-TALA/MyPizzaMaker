@@ -8,26 +8,65 @@ namespace backend.Service
     {
         private readonly ILogger<CartService> _logger;
         private readonly ICartRepository _cartRepository;
+        private readonly IPizzaRepository _pizzaRepository;
+
         protected readonly IMapper _mapper;
 
-        public CartService(ICartRepository cartRepository, ILogger<CartService> logger, IMapper mapper)
+        public CartService(ICartRepository cartRepository, IPizzaRepository pizzaRepository, ILogger<CartService> logger, IMapper mapper)
         {
             _cartRepository = cartRepository;
+            _pizzaRepository = pizzaRepository;
             _logger = logger;
             _mapper = mapper;
         }
 
-        public async Task<List<Dto.Cart>> GetAllCarts()
+        public async Task<List<Dto.CartPizzaIngredient>> GetAllCarts()
         {
+            List<Dto.CartPizzaIngredient> cartPizzas = new List<Dto.CartPizzaIngredient>();
+            
+            // getting all carts
             List<Dbo.Cart> carts = _cartRepository.GetAllCarts();
-            return _mapper.Map<List<Dto.Cart>>(carts);
+
+            foreach (var cart in carts)
+            {
+                // getting all pizzas and ingredients from cart
+                Dto.CartPizzaIngredient cartPizzaIngredient = this.GetCartPizzasIngredients(cart);
+                cartPizzas.Add(cartPizzaIngredient);
+            }
+
+            return cartPizzas;
         }
 
-        public async Task<Dto.Cart> GetCart(int id)
+        public async Task<Dto.CartPizzaIngredient> GetCart(int id)
         {
             Dbo.Cart cart = await _cartRepository.GetOne(id);
-            return _mapper.Map<Dto.Cart>(cart);
+            return this.GetCartPizzasIngredients(cart);
+        }
 
+        private Dto.CartPizzaIngredient GetCartPizzasIngredients(Dbo.Cart cart)
+        {
+            // get pizzas associated to cart
+            List<Dbo.CartPizzaWithName> pizzas = _cartRepository.getPizzasfromCart(cart.Id);
+            List<Dto.CartPizzaIngredient.Pizza> pizzasMapped = new List<Dto.CartPizzaIngredient.Pizza>();
+            foreach (var pizza in pizzas)
+            {
+                // get ingredients associated to pizza
+                List<Dbo.Ingredient> ingredients = _pizzaRepository.GetPizzaIngredients(pizza.PizzaId);
+                List<Dto.CartPizzaIngredient.Ingredient> ingredientsMapped = _mapper.Map<List<Dto.CartPizzaIngredient.Ingredient>>(ingredients);
+
+                Dto.CartPizzaIngredient.Pizza pizzaToReturn = new Dto.CartPizzaIngredient.Pizza();
+                pizzaToReturn.PizzaId = pizza.PizzaId;
+                pizzaToReturn.Name = pizza.PizzaName;
+                pizzaToReturn.Ingredients = ingredientsMapped;
+                pizzasMapped.Add(pizzaToReturn);
+            }
+
+            Dto.CartPizzaIngredient cartPizzaIngredient = new Dto.CartPizzaIngredient();
+            cartPizzaIngredient.CartId = cart.Id;
+            cartPizzaIngredient.Status = cart.Status;
+            cartPizzaIngredient.Date = cart.Date;
+            cartPizzaIngredient.Pizzas = pizzasMapped;
+            return cartPizzaIngredient;
         }
 
         public async Task<Dto.Cart> CreateCart(Dto.CreateCart createCart)
@@ -59,6 +98,21 @@ namespace backend.Service
         {
             List<Dbo.Cart> carts = _cartRepository.GetTodayCarts();
             return _mapper.Map<List<Dto.Cart>>(carts);
+        }
+
+        public async Task<bool> AddPizzaToCart(int cartId, Dto.AddPizza addPizza)
+        {
+            // add pizza in db
+            Dbo.Pizza pizza = new Dbo.Pizza();
+            pizza.Name = addPizza.Name;
+            Dbo.Pizza createdPizza = await _pizzaRepository.Insert(pizza);
+
+            // add ingredients
+            bool addedIngredients = await _pizzaRepository.AddPizzaIngredients(createdPizza.Id, addPizza.IngredientIds);
+
+            // add pizza to cart
+            bool addedPizzaToCart = await _cartRepository.addPizzaToCart(createdPizza.Id, cartId);
+            return true;
         }
     }
 }

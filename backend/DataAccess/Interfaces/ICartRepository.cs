@@ -7,5 +7,8 @@
         public int GetDailyStats();
         public int GetWeeklyStats();
         public int GetMonthlyStats();
+
+        public Task<bool> addPizzaToCart(int pizzaId, int cartId);
+        public List<Dbo.CartPizzaWithName> getPizzasfromCart(int cartId);
     }
 }

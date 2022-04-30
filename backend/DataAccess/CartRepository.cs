@@ -41,5 +41,46 @@ namespace backend.DataAccess
             var result = _context.Carts.Where(c => c.Date.Month == today.Month && c.Date.Year == today.Year);
             return result.Count();
         }
+
+        public async Task<bool> addPizzaToCart(int pizzaId, int cartId)
+        {
+            try
+            {
+                Dbo.CartsPizza cartsPizza = new Dbo.CartsPizza();
+                cartsPizza.PizzaId = pizzaId;
+                cartsPizza.CartId = cartId;
+
+                EfModels.CartsPizza cartsPizzaModel = _mapper.Map<EfModels.CartsPizza>(cartsPizza);
+                _context.CartsPizzas.Add(cartsPizzaModel);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            catch (Exception e)
+            {
+                _logger.LogError("Unable to insert data to the database in CartsPizza", e);
+                return false;
+            }
+        }
+
+        public List<Dbo.CartPizzaWithName> getPizzasfromCart(int cartId)
+        {
+            try
+            {
+                List<Dbo.CartPizzaWithName> result = _context.CartsPizzas.Where(cp => cp.CartId == cartId).Join(
+                    _context.Pizzas,
+                    cp => cp.PizzaId,
+                    p => p.Id,
+                    (cp, p) => new Dbo.CartPizzaWithName(p.Id, cp.CartId, p.Name)
+                ).ToList();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unable to get data from the database in getPizzasFromCart", e);
+                return null;
+            }
+        }
     }
 }
