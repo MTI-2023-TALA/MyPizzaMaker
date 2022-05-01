@@ -6,7 +6,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new AppShell());
 
             Routing.RegisterRoute(nameof(IngredientPage), typeof(IngredientPage));
             Routing.RegisterRoute(nameof(CommandPage), typeof(CommandPage));

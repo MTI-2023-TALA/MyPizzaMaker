@@ -7,22 +7,25 @@
     Shell.FlyoutBehavior="Disabled">
     <Shell.Resources />
 
-    <Shell.FlyoutHeader>
-        <Grid>
-            <Label Text="Hello !"></Label>
-        </Grid>
-    </Shell.FlyoutHeader>
+    <NavigationPage.TitleView>
+        <HorizontalStackLayout Spacing="5" Margin="5">
+            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="My Pizza Maker"/>
+            <Button Text="{Binding Ingredient.Title}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="OnButtonIngredientClicked" />
+            <Button Text="{Binding Command.Title}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="OnButtonCommandCLicked" />
+            <Button Text="{Binding Stats.Title}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="OnButtonStatsCLicked" />
+        </HorizontalStackLayout>
+    </NavigationPage.TitleView>
 
-    <ShellContent
-        Title="Ingrédient"
-        ContentTemplate="{DataTemplate local:IngredientPage}"
-        Route="IngredientPage" />
-    <ShellContent
-        Title="Commandes"
-        ContentTemplate="{DataTemplate local:CommandPage}"
-        Route="CommandPage" />
-    <ShellContent
-        Title="Statistique"
-        ContentTemplate="{DataTemplate local:StatPage}"
-        Route="StatPage" />
+    <ShellContent Title="{Binding Ingredient.Title}"
+                  Icon="{AppThemeBinding Light=discover.png, Dark=discover_dark.png}"
+                  ContentTemplate="{DataTemplate local:IngredientPage}"/>
 </Shell>

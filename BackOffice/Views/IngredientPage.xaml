@@ -5,11 +5,44 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            <Label 
-                Text="Hello, World!"
+            <VerticalStackLayout BackgroundColor="DimGray" Spacing="10" Padding="20">
+                <Label 
+                Text="Ajouter un ingrédient"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
+
+                <Picker x:Name="picker"
+                        Title="Catégories">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Baboon</x:String>
+                            <x:String>Capuchin Monkey</x:String>
+                            <x:String>Blue Monkey</x:String>
+                            <x:String>Squirrel Monkey</x:String>
+                            <x:String>Golden Lion Tamarin</x:String>
+                            <x:String>Howler Monkey</x:String>
+                            <x:String>Japanese Macaque</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <VerticalStackLayout>
+                    <Label Text="Nom" />
+                    <Entry x:Name="entry"
+                       Placeholder="Nom de l'ingredient" />
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="5">
+                    <Label Text="Disponible: " /> 
+                    <CheckBox IsChecked="true"  />
+                </HorizontalStackLayout>
+
+                <Button Text="Confirmer"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
