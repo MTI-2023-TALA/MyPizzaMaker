@@ -6,6 +6,8 @@
         {
             InitializeComponent();
 
+            Helper.ApiHelper.InitializeClient();
+
             MainPage = new NavigationPage(new AppShell());
 
             Routing.RegisterRoute(nameof(IngredientPage), typeof(IngredientPage));

@@ -12,7 +12,7 @@
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-                <Picker x:Name="picker"
+                <Picker x:Name="category"
                         Title="Catégories">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
@@ -29,18 +29,19 @@
 
                 <VerticalStackLayout>
                     <Label Text="Nom" />
-                    <Entry x:Name="entry"
+                    <Entry x:Name="name"
                        Placeholder="Nom de l'ingredient" />
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout Spacing="5">
-                    <Label Text="Disponible: " /> 
-                    <CheckBox IsChecked="true"  />
+                    <Label Text="Disponible: " />
+                    <CheckBox x:Name="isAvailable" IsChecked="true"  />
                 </HorizontalStackLayout>
 
                 <Button Text="Confirmer"
                 VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                Clicked="Button_Clicked" />
 
             </VerticalStackLayout>
         </VerticalStackLayout>
