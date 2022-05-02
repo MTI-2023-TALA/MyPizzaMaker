@@ -30,15 +30,25 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public async Task<Cart> CreateCart([FromBody] CreateCart createCart)
+        public async Task<IActionResult> CreateCart([FromBody] CreateCart createCart)
         {
-            return await _cartService.CreateCart(createCart);
+            Cart cart = await _cartService.CreateCart(createCart);
+            if (cart == null)
+            {
+                return BadRequest("Please provide a correct status for cart!");
+            }
+            return Ok(cart);
         }
 
         [HttpPatch("{id:int}")]
-        public async Task<Cart> UpdateCart(int id, [FromBody] UpdateCart updateCart)
+        public async Task<IActionResult> UpdateCart(int id, [FromBody] UpdateCart updateCart)
         {
-            return await _cartService.UpdateCart(id, updateCart);
+            Cart cart = await _cartService.UpdateCart(id, updateCart);
+            if (cart == null)
+            {
+                return BadRequest("Please provide a correct status for cart!");
+            }
+            return Ok(cart);
         }
 
         [HttpPost("{id:int}")]

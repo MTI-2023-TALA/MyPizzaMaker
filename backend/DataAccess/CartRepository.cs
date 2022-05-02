@@ -42,7 +42,7 @@ namespace backend.DataAccess
             return result.Count();
         }
 
-        public async Task<bool> addPizzaToCart(int pizzaId, int cartId)
+        public async Task<bool> AddPizzaToCart(int pizzaId, int cartId)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace backend.DataAccess
             }
         }
 
-        public List<Dbo.CartPizzaWithName> getPizzasfromCart(int cartId)
+        public List<Dbo.CartPizzaWithName> GetPizzasfromCart(int cartId)
         {
             try
             {
@@ -81,6 +81,21 @@ namespace backend.DataAccess
                 _logger.LogError("Unable to get data from the database in getPizzasFromCart", e);
                 return null;
             }
+        }
+
+        public bool ValidateCartStatus(string status)
+        {
+            List<string> authorized_values = new List<String>()
+            {
+                "in creation",
+                "waiting for confirmation",
+                "in preparation",
+                "to be collected",
+                "served",
+                "cancelled",
+            };
+
+            return authorized_values.Contains(status);
         }
     }
 }

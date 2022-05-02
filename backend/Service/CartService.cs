@@ -9,7 +9,6 @@ namespace backend.Service
         private readonly ILogger<CartService> _logger;
         private readonly ICartRepository _cartRepository;
         private readonly IPizzaRepository _pizzaRepository;
-
         protected readonly IMapper _mapper;
 
         public CartService(ICartRepository cartRepository, IPizzaRepository pizzaRepository, ILogger<CartService> logger, IMapper mapper)
@@ -40,13 +39,13 @@ namespace backend.Service
         public async Task<Dto.CartPizzaIngredient> GetCart(int id)
         {
             Dbo.Cart cart = await _cartRepository.GetOne(id);
-            return this.GetCartPizzasIngredients(cart);
+            return GetCartPizzasIngredients(cart);
         }
 
         private Dto.CartPizzaIngredient GetCartPizzasIngredients(Dbo.Cart cart)
         {
             // get pizzas associated to cart
-            List<Dbo.CartPizzaWithName> pizzas = _cartRepository.getPizzasfromCart(cart.Id);
+            List<Dbo.CartPizzaWithName> pizzas = _cartRepository.GetPizzasfromCart(cart.Id);
             List<Dto.CartPizzaIngredient.Pizza> pizzasMapped = new List<Dto.CartPizzaIngredient.Pizza>();
             foreach (var pizza in pizzas)
             {
@@ -71,6 +70,12 @@ namespace backend.Service
 
         public async Task<Dto.Cart> CreateCart(Dto.CreateCart createCart)
         {
+            // verify cart status
+            if (!_cartRepository.ValidateCartStatus(createCart.Status))
+            {
+                return null;
+            }
+
             Dbo.Cart cart = new Dbo.Cart();
             cart.Status = createCart.Status;
             cart.Date = createCart.Date;
@@ -81,6 +86,11 @@ namespace backend.Service
 
         public async Task<Dto.Cart> UpdateCart(int id, Dto.UpdateCart updateCart)
         {
+            if (!_cartRepository.ValidateCartStatus(updateCart.Status))
+            {
+                return null;
+            }
+
             Dbo.Cart cart = new Dbo.Cart();
             cart.Id = id;
             cart.Status = updateCart.Status;
@@ -111,7 +121,7 @@ namespace backend.Service
             bool addedIngredients = await _pizzaRepository.AddPizzaIngredients(createdPizza.Id, addPizza.IngredientIds);
 
             // add pizza to cart
-            bool addedPizzaToCart = await _cartRepository.addPizzaToCart(createdPizza.Id, cartId);
+            bool addedPizzaToCart = await _cartRepository.AddPizzaToCart(createdPizza.Id, cartId);
             return true;
         }
     }
