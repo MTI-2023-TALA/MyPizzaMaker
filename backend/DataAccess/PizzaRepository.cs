@@ -12,14 +12,30 @@ namespace backend.DataAccess
 
         public List<Dbo.Pizza> GetAllPizzas()
         {
-            var result = _context.Pizzas.ToList();
-            return _mapper.Map<List<Dbo.Pizza>>(result);
+            try
+            {
+                var result = _context.Pizzas.ToList();
+                return _mapper.Map<List<Dbo.Pizza>>(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unable to get data from database in GetAllPizzas.", e);
+                return null;
+            } 
         }
 
         public Dbo.Pizza GetPizza(long pizzaId)
         {
-            var result = _context.Pizzas.Where(p => p.Id == pizzaId);
-            return _mapper.Map<Dbo.Pizza>(result);
+            try
+            {
+                var result = _context.Pizzas.Where(p => p.Id == pizzaId);
+                return _mapper.Map<Dbo.Pizza>(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unable to get data from database in GetPizza.", e);
+                return null;
+            }
         }
 
         public async Task<bool> AddPizzaIngredients(int pizzaId, List<int> ingredientsIds)
@@ -36,31 +52,31 @@ namespace backend.DataAccess
                     _context.PizzasIngredients.Add(dbPizzasIngredient);
                     await _context.SaveChangesAsync();
                 }
+                return true;
             }
-
             catch (Exception e)
             {
-                _logger.LogError("Unable to insert data to the database in PizzaIngredients", e);
+                _logger.LogError("Unable to insert data to the database in PizzaIngredients.", e);
                 return false;
             }
-
-            return true;
         }
 
         public List<Dbo.Ingredient> GetPizzaIngredients(int pizzaId)
         {
             try
             {
-                List<Dbo.Ingredient> ingredients = _context.PizzasIngredients.Where(pi => pi.PizzaId == pizzaId).Join(
-                    _context.Ingredients,
-                    pi => pi.IngredientId,
-                    i => i.Id,
-                    (pi, i) => new Dbo.Ingredient(i.Id, i.Name, i.IsAvailable, i.ImagePath, i.Category)).ToList();
+                List<Dbo.Ingredient> ingredients = _context.PizzasIngredients.Where(pi => pi.PizzaId == pizzaId)
+                    .Join(
+                        _context.Ingredients,
+                        pi => pi.IngredientId,
+                        i => i.Id,
+                        (pi, i) => new Dbo.Ingredient(i.Id, i.Name, i.IsAvailable, i.ImagePath, i.Category)
+                    ).ToList();
                 return ingredients;
             }
             catch (Exception e)
             {
-                _logger.LogError("Unable to get data from the database in GetPizzaIngredients", e);
+                _logger.LogError("Unable to get data from the database in GetPizzaIngredients.", e);
                 return null;
             }
         }

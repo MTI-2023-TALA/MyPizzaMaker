@@ -20,13 +20,23 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCarts()
         {
-            return Ok(await _cartService.GetAllCarts());
+            var carts = await _cartService.GetAllCarts();
+            if (carts == null)
+            {
+                return BadRequest("An error occured while retrieving Carts.");
+            }
+            return Ok(carts);
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetCart(int id)
         {
-            return Ok(await _cartService.GetCart(id));
+            var cart = await _cartService.GetCart(id);
+            if (cart == null)
+            {
+                return BadRequest("An error occured while retrieving Cart.");
+            }
+            return Ok(cart);
         }
 
         [HttpPost]
@@ -35,7 +45,7 @@ namespace backend.Controllers
             Cart cart = await _cartService.CreateCart(createCart);
             if (cart == null)
             {
-                return BadRequest("Please provide a correct status for cart!");
+                return BadRequest("Please provide a correct status for cart.");
             }
             return Ok(cart);
         }
@@ -46,7 +56,7 @@ namespace backend.Controllers
             Cart cart = await _cartService.UpdateCart(id, updateCart);
             if (cart == null)
             {
-                return BadRequest("Please provide a correct status for cart!");
+                return BadRequest("Please provide a correct status for cart.");
             }
             return Ok(cart);
         }
@@ -54,13 +64,23 @@ namespace backend.Controllers
         [HttpPost("{id:int}")]
         public async Task<IActionResult> AddPizzaToCart(int id, [FromBody] AddPizza addPizza)
         {
-            return Ok(await _cartService.AddPizzaToCart(id, addPizza));
+            bool addedPizzaToCart = await _cartService.AddPizzaToCart(id, addPizza);
+            if (!addedPizzaToCart)
+            {
+                return BadRequest("An error occured while adding pizzas to cart.");
+            }
+            return Ok(addedPizzaToCart);
         }
 
         [HttpGet("today")]
         public async Task<IActionResult> GetTodayCarts()
         {
-            return Ok(await _cartService.GetTodayCarts());
+            List<Cart> carts = await _cartService.GetTodayCarts();
+            if (carts == null)
+            {
+                return BadRequest("An error occured while trying to get daily carts.");
+            }
+            return Ok(carts);
         }
     }
 }

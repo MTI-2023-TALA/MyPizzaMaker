@@ -5,5 +5,6 @@
         public List<Dbo.Ingredient> GetAllIngredient();
         public List<Dbo.Ingredient> GetIngredientWithCategory(string category);
         public List<Dbo.IngredientStats> GetIngredientsStats();
+        public bool ValidateIngredientCategory(string category);
     }
 }

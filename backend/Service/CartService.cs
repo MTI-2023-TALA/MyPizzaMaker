@@ -25,11 +25,19 @@ namespace backend.Service
             
             // getting all carts
             List<Dbo.Cart> carts = _cartRepository.GetAllCarts();
+            if (carts == null)
+            {
+                return null;
+            }
 
             foreach (var cart in carts)
             {
                 // getting all pizzas and ingredients from cart
-                Dto.CartPizzaIngredient cartPizzaIngredient = this.GetCartPizzasIngredients(cart);
+                Dto.CartPizzaIngredient cartPizzaIngredient = GetCartPizzasIngredients(cart);
+                if (cartPizzaIngredient == null)
+                {
+                    return null;
+                }
                 cartPizzas.Add(cartPizzaIngredient);
             }
 
@@ -39,18 +47,33 @@ namespace backend.Service
         public async Task<Dto.CartPizzaIngredient> GetCart(int id)
         {
             Dbo.Cart cart = await _cartRepository.GetOne(id);
-            return GetCartPizzasIngredients(cart);
+            Dto.CartPizzaIngredient cartPizzaIngredient = GetCartPizzasIngredients(cart);
+            if (cartPizzaIngredient == null)
+            {
+                return null;
+            }
+            return cartPizzaIngredient;
         }
 
         private Dto.CartPizzaIngredient GetCartPizzasIngredients(Dbo.Cart cart)
         {
             // get pizzas associated to cart
             List<Dbo.CartPizzaWithName> pizzas = _cartRepository.GetPizzasfromCart(cart.Id);
+            if (pizzas == null)
+            {
+                return null;
+            }
+
             List<Dto.CartPizzaIngredient.Pizza> pizzasMapped = new List<Dto.CartPizzaIngredient.Pizza>();
             foreach (var pizza in pizzas)
             {
                 // get ingredients associated to pizza
                 List<Dbo.Ingredient> ingredients = _pizzaRepository.GetPizzaIngredients(pizza.PizzaId);
+                if (ingredients == null)
+                {
+                    return null;
+                }
+
                 List<Dto.CartPizzaIngredient.Ingredient> ingredientsMapped = _mapper.Map<List<Dto.CartPizzaIngredient.Ingredient>>(ingredients);
 
                 Dto.CartPizzaIngredient.Pizza pizzaToReturn = new Dto.CartPizzaIngredient.Pizza();
@@ -81,6 +104,10 @@ namespace backend.Service
             cart.Date = createCart.Date;
 
             var result = await _cartRepository.Insert(cart);
+            if (result == null)
+            {
+                return null;
+            }
             return _mapper.Map<Dto.Cart>(result);
         }
 
@@ -96,17 +123,20 @@ namespace backend.Service
             cart.Status = updateCart.Status;
 
             var result = await _cartRepository.Update(cart);
+            if (result == null)
+            {
+                return null;
+            }
             return _mapper.Map<Dto.Cart>(result);
-        }
-
-        public async Task<bool> DeleteCart(int id)
-        {
-            return await _cartRepository.Delete(id);
         }
 
         public async Task<List<Dto.Cart>> GetTodayCarts()
         {
             List<Dbo.Cart> carts = _cartRepository.GetTodayCarts();
+            if (carts == null)
+            {
+                return null;
+            }
             return _mapper.Map<List<Dto.Cart>>(carts);
         }
 
@@ -115,13 +145,25 @@ namespace backend.Service
             // add pizza in db
             Dbo.Pizza pizza = new Dbo.Pizza();
             pizza.Name = addPizza.Name;
+
+            // add pizza
             Dbo.Pizza createdPizza = await _pizzaRepository.Insert(pizza);
+            if (createdPizza == null)
+            {
+                return false;
+            }
 
             // add ingredients
-            bool addedIngredients = await _pizzaRepository.AddPizzaIngredients(createdPizza.Id, addPizza.IngredientIds);
+            if (await _pizzaRepository.AddPizzaIngredients(createdPizza.Id, addPizza.IngredientIds) == false)
+            {
+                return false;
+            }
 
             // add pizza to cart
-            bool addedPizzaToCart = await _cartRepository.AddPizzaToCart(createdPizza.Id, cartId);
+            if (await _cartRepository.AddPizzaToCart(createdPizza.Id, cartId) == false)
+            {
+                return false;
+            }
             return true;
         }
     }

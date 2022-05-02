@@ -37,6 +37,10 @@ namespace backend.Service
         public async Task<List<Dto.IngredientStats>> GetIngredientsStats()
         {
             List<Dbo.IngredientStats> stats = _ingredientRepository.GetIngredientsStats();
+            if (stats == null)
+            {
+                return null;
+            }
             return _mapper.Map<List<Dto.IngredientStats>>(stats);
         }
     }

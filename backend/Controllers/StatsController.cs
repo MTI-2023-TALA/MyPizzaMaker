@@ -19,26 +19,45 @@ namespace backend.Controllers
         [HttpGet("daily")]
         public async Task<IActionResult> GetDailyStats()
         {
-            return Ok(await _statsService.GetDailyStats());
+            var dailyStats = await _statsService.GetDailyStats();
+            if (dailyStats == -1)
+            {
+                return BadRequest("An error occured while retrieving daily stats.");
+            }
+            return Ok(dailyStats);
         }
 
         [HttpGet("weekly")]
         public async Task<IActionResult> GetWeeklyStats()
         {
-            return Ok(await _statsService.GetWeeklyStats());
-
+            var weeklyStats = await _statsService.GetWeeklyStats();
+            if (weeklyStats == -1)
+            {
+                return BadRequest("An error occured while retrieving weekly stats.");
+            }
+            return Ok(weeklyStats);
         }
 
         [HttpGet("monthly")]
         public async Task<IActionResult> GetMonthlyStats()
         {
-            return Ok(await _statsService.GetMonthlyStats());
+            var  monthlyStats = await _statsService.GetMonthlyStats();
+            if (monthlyStats == -1)
+            {
+                return BadRequest("An error occured while retrieving monthly stats.");
+            }
+            return Ok(monthlyStats);
         }
 
         [HttpGet("ingredients")]
         public async Task<IActionResult> GetIngredientsStats()
         {
-            return Ok(await _statsService.GetIngredientsStats());
+            var ingredientsStats = await _statsService.GetIngredientsStats();
+            if (ingredientsStats == null)
+            {
+                return BadRequest("An error occured while retrieving ingredients stats.");
+            }
+            return Ok(ingredientsStats);
         }
     }
 }

@@ -21,31 +21,56 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllIngredient()
         {
-            return Ok(await _ingredientService.GetAllIngredient());
+            var ingredients = await _ingredientService.GetAllIngredient();
+            if (ingredients == null)
+            {
+                return BadRequest("An error occured while retrieving Ingredients.");
+            }
+            return Ok(ingredients);
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetIngredient(int id)
         {
-            return Ok(await _ingredientService.GetIngredient(id));
+            var ingredient = await _ingredientService.GetIngredient(id);
+            if (ingredient == null)
+            {
+                return BadRequest("An error occured while retrieving Ingredient.");
+            }
+            return Ok(ingredient);
         }
 
         [HttpGet("{category}")]
         public async Task<IActionResult> GetIngredientWithCategory(string category)
         {
-            return Ok(await _ingredientService.GetByCategory(category));
+            var ingredients = await _ingredientService.GetByCategory(category);
+            if (ingredients == null)
+            {
+                return BadRequest("An error occured while retrieving IngredientsWithCategory.");
+            }
+            return Ok(ingredients);
         }
 
         [HttpPost]
-        public async Task<Ingredient> CreateIngredient([FromBody] CreateIngredient createIngredient)
+        public async Task<IActionResult> CreateIngredient([FromBody] CreateIngredient createIngredient)
         {
-            return await _ingredientService.CreateIngredient(createIngredient);
+            var createdIngredient = await _ingredientService.CreateIngredient(createIngredient);
+            if (createdIngredient == null)
+            {
+                return BadRequest("An error occured while creating Ingredient.");
+            }
+            return Ok(createdIngredient);
         }
 
         [HttpPatch("{id:int}")]
-        public async Task<Ingredient> UpdateIngredient(int id, [FromBody] UpdateIngredient updateIngredient)
+        public async Task<IActionResult> UpdateIngredient(int id, [FromBody] UpdateIngredient updateIngredient)
         {
-            return await _ingredientService.UpdateIngredient(id, updateIngredient);
+            var updatedIngredient = await _ingredientService.UpdateIngredient(id, updateIngredient);
+            if (updatedIngredient == null)
+            {
+                return BadRequest("An error occured while updating Ingredient.");
+            }
+            return Ok(updatedIngredient);
         }
 
         [HttpDelete("{id:int}")]
