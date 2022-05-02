@@ -21,5 +21,34 @@ namespace backend.DataAccess
             var result = _context.Ingredients.Where(i => i.Category == category);
             return _mapper.Map<List<Dbo.Ingredient>>(result);
         }
+
+        public List<Dbo.IngredientStats> GetIngredientsStats()
+        {
+            try
+            {
+                List<Dbo.IngredientStats> ingredientStats = _context
+                    .PizzasIngredients
+                    .Join(
+                        _context.Ingredients,
+                        pi => pi.IngredientId,
+                        i => i.Id,
+                        (pi, i) => new
+                        {
+                            IngredientId = i.Id,
+                            Name = i.Name,
+                            PizzaId = pi.PizzaId
+                        }
+                    )
+                    .GroupBy(
+                        p => p.Name)
+                    .Select(g => new Dbo.IngredientStats(g.Key, g.Count())).ToList();
+                return ingredientStats;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unable to get data from the database in GetIngredientsStats", e);
+                return null;
+            }
+        }
     }
 }

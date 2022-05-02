@@ -34,5 +34,11 @@ namespace backend.Controllers
         {
             return Ok(await _statsService.GetMonthlyStats());
         }
+
+        [HttpGet("ingredients")]
+        public async Task<IActionResult> GetIngredientsStats()
+        {
+            return Ok(await _statsService.GetIngredientsStats());
+        }
     }
 }

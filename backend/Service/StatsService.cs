@@ -8,11 +8,13 @@ namespace backend.Service
     {
         private readonly ILogger<StatsService> _logger;
         private readonly ICartRepository _cartRepository;
+        private readonly IIngredientRepository _ingredientRepository;
         protected readonly IMapper _mapper;
 
-        public StatsService(ICartRepository cartRepository, ILogger<StatsService> logger, IMapper mapper)
+        public StatsService(ICartRepository cartRepository, IIngredientRepository ingredientRepository, ILogger<StatsService> logger, IMapper mapper)
         {
             _cartRepository = cartRepository;
+            _ingredientRepository = ingredientRepository;
             _logger = logger;
             _mapper = mapper;
         }
@@ -30,6 +32,12 @@ namespace backend.Service
         public async Task<int> GetMonthlyStats()
         {
             return _cartRepository.GetMonthlyStats();
+        }
+
+        public async Task<List<Dto.IngredientStats>> GetIngredientsStats()
+        {
+            List<Dbo.IngredientStats> stats = _ingredientRepository.GetIngredientsStats();
+            return _mapper.Map<List<Dto.IngredientStats>>(stats);
         }
     }
 }

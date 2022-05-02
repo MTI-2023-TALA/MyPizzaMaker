@@ -60,7 +60,7 @@ namespace backend.DataAccess
             }
             catch (Exception e)
             {
-                _logger.LogError("Unable to get data from the database in getPizzaIngredients", e);
+                _logger.LogError("Unable to get data from the database in GetPizzaIngredients", e);
                 return null;
             }
         }
