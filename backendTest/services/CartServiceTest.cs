@@ -148,6 +148,16 @@ namespace backendTest.services
         }
 
         [Fact]
+        public async void TestGetNonExistingCart()
+        {
+            PopulateDB();
+
+            // getCarts
+            backend.Dto.CartPizzaIngredient cart = await _cartService.GetCart(-42);
+            Assert.Null(cart);
+        }
+
+        [Fact]
         public async void TestAddCart()
         {
             backend.Dto.Cart addedCart = await _cartService.CreateCart(new backend.Dto.CreateCart
