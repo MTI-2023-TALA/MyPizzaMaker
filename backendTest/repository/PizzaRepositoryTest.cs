@@ -16,6 +16,7 @@ namespace backendTest.repository
     {
         private readonly IPizzaRepository _pizzaRepository;
         private readonly DbContextOptions<myPizzaMakerContext> _options;
+        private readonly IMapper _mapper;
 
         public PizzaRepositoryTest()
         {
@@ -107,6 +108,62 @@ namespace backendTest.repository
                 List<backend.Dbo.Pizza> pizzas = _pizzaRepository.GetAllPizzas();
                 Assert.Single(pizzas);
                 Assert.Equal("Pizza To Insert", pizzas[0].Name);
+            }
+        }
+
+        [Fact]
+        public void TestGetPizzaIngredients()
+        {
+            using (var context = new myPizzaMakerContext(_options))
+            {
+                // create pizza
+                context.Pizzas.Add(new Pizza { Name = "Pizza 42" });
+
+                // create ingredients
+                context.Ingredients.Add(new Ingredient
+                {
+                    Name = "Tomato",
+                    IsAvailable = true,
+                    Category = "base",
+                });
+                context.Ingredients.Add(new Ingredient
+                {
+                    Name = "Dough Dough",
+                    IsAvailable = true,
+                    Category = "dough",
+                });
+                context.Ingredients.Add(new Ingredient
+                {
+                    Name = "Beef",
+                    IsAvailable = true,
+                    Category = "meat",
+                });
+                // add to pizzaIngredients
+                context.PizzasIngredients.Add(new PizzasIngredient
+                {
+                    PizzaId = 1,
+                    IngredientId = 1,
+                });
+                context.PizzasIngredients.Add(new PizzasIngredient
+                {
+                    PizzaId = 1,
+                    IngredientId = 2,
+                });
+                context.PizzasIngredients.Add(new PizzasIngredient
+                {
+                    PizzaId = 1,
+                    IngredientId = 3,
+                });
+                context.SaveChanges();
+            }
+
+            using (var context = new myPizzaMakerContext(_options))
+            {
+                List<backend.Dbo.Ingredient> pizzaIngredients = _pizzaRepository.GetPizzaIngredients(1);
+                Assert.Equal(3, pizzaIngredients.Count());
+                Assert.Equal("Tomato", pizzaIngredients[0].Name);
+                Assert.Equal("Dough Dough", pizzaIngredients[0].Name);
+                Assert.Equal("Beef", pizzaIngredients[0].Name);
             }
         }
     }

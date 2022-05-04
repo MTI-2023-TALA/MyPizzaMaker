@@ -24,20 +24,6 @@ namespace backend.DataAccess
             } 
         }
 
-        public Dbo.Pizza GetPizza(long pizzaId)
-        {
-            try
-            {
-                var result = _context.Pizzas.Where(p => p.Id == pizzaId);
-                return _mapper.Map<Dbo.Pizza>(result);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("Unable to get data from database in GetPizza.", e);
-                return null;
-            }
-        }
-
         public async Task<bool> AddPizzaIngredients(int pizzaId, List<int> ingredientsIds)
         {
             try
@@ -48,7 +34,7 @@ namespace backend.DataAccess
                     pizzasIngredient.PizzaId = pizzaId;
                     pizzasIngredient.IngredientId = ingredientId;
 
-                    EfModels.PizzasIngredient dbPizzasIngredient = _mapper.Map<EfModels.PizzasIngredient>(pizzasIngredient);
+                    PizzasIngredient dbPizzasIngredient = _mapper.Map<PizzasIngredient>(pizzasIngredient);
                     _context.PizzasIngredients.Add(dbPizzasIngredient);
                     await _context.SaveChangesAsync();
                 }
