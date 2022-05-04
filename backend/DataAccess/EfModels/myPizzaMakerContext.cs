@@ -51,22 +51,22 @@ namespace backend.DataAccess.EfModels
 
             modelBuilder.Entity<CartsPizza>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("carts_pizzas");
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CartId).HasColumnName("cart_id");
 
                 entity.Property(e => e.PizzaId).HasColumnName("pizza_id");
 
                 entity.HasOne(d => d.Cart)
-                    .WithMany()
+                    .WithMany(p => p.CartsPizzas)
                     .HasForeignKey(d => d.CartId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_carts_pizzas_carts");
 
                 entity.HasOne(d => d.Pizza)
-                    .WithMany()
+                    .WithMany(p => p.CartsPizzas)
                     .HasForeignKey(d => d.PizzaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_carts_pizzas_pizzas");
@@ -110,22 +110,22 @@ namespace backend.DataAccess.EfModels
 
             modelBuilder.Entity<PizzasIngredient>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("pizzas_ingredients");
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
 
                 entity.Property(e => e.PizzaId).HasColumnName("pizza_id");
 
                 entity.HasOne(d => d.Ingredient)
-                    .WithMany()
+                    .WithMany(p => p.PizzasIngredients)
                     .HasForeignKey(d => d.IngredientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_pizzas_ingredients_ingredients");
 
                 entity.HasOne(d => d.Pizza)
-                    .WithMany()
+                    .WithMany(p => p.PizzasIngredients)
                     .HasForeignKey(d => d.PizzaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_pizzas_ingredients_pizzas");
