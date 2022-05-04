@@ -10,11 +10,14 @@ namespace BackOffice.ViewModal
 {
     internal class IngredientModel
     {
-        public AppSection Ingredient { get; set; }
+        public List<Ingredient> Ingredients;
+        public string Test;
 
         public IngredientModel()
         {
-            Ingredient = new AppSection() { Title = "Ingrédient", Icon = "ingredient.png", TargetType = typeof(IngredientPage) };
+            Ingredients = new List<Ingredient>();
+            Ingredients.Add(new Ingredient());
+            Test = "Test";
         }
     }
 }

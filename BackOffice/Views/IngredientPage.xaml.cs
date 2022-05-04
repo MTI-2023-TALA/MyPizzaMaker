@@ -13,26 +13,28 @@ namespace BackOffice
         public IngredientPage()
         {
             InitializeComponent();
-            this._ingredientService = new IngredientService();
-            this.BindingContext = this;
+            _ingredientService = new IngredientService();
+            BindingContext = new IngredientModel();
         }
 
         protected override async void OnAppearing()
         {
-            this.Ingredients = await this._ingredientService.LoadIngredients();
+            base.OnAppearing();
+            Ingredients = await _ingredientService.LoadIngredients();
+            
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
             Console.WriteLine(Ingredients.Count);
             CreateIngredient createIngredient = new CreateIngredient();
-            createIngredient.Name = this.name.Text;
-            createIngredient.Category = CategoryHelper.TranslateCategory((string)this.category.ItemsSource[this.category.SelectedIndex]);
-            createIngredient.IsAvailable = this.isAvailable.IsChecked;
+            createIngredient.Name = name.Text;
+            createIngredient.Category = CategoryHelper.TranslateCategory((string)category.ItemsSource[category.SelectedIndex]);
+            createIngredient.IsAvailable = isAvailable.IsChecked;
 
-            this.name.Text = "";
-            await this._ingredientService.CreateIngredient(createIngredient);
-            this.Ingredients = await this._ingredientService.LoadIngredients();
+            name.Text = "";
+            await _ingredientService.CreateIngredient(createIngredient);
+            Ingredients = await _ingredientService.LoadIngredients();
         }
     }
 }
