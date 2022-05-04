@@ -10,8 +10,7 @@ namespace BackOffice
         public IngredientPage()
         {
             InitializeComponent();
-
-            _ingredientService = new IngredientService();
+            this._ingredientService = new IngredientService();
         }
 
         public async Task loadIngredient()

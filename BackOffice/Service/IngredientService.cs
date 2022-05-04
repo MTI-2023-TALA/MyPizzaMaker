@@ -12,19 +12,16 @@ namespace BackOffice.Service
 {
     public class IngredientService
     {
-        public async Task LoadIngredients()
+        public async Task<List<Ingredient>> LoadIngredients()
         {
-            string url = ApiHelper.baseUrl + "ingredient";
+            string url = Config.BaseWeb + "ingredient";
 
             using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
             {
                 if (response.IsSuccessStatusCode)
                 {
                     List<Ingredient> ingredients = await response.Content.ReadFromJsonAsync<List<Ingredient>>();
-                    foreach(Ingredient ingredient in ingredients)
-                    {
-                        Console.WriteLine(ingredient.Name);
-                    }
+                    return ingredients;
                 } else
                 {
                     throw new Exception(response.ReasonPhrase);
@@ -34,7 +31,7 @@ namespace BackOffice.Service
 
         public async Task CreateIngredient(CreateIngredient createIngredient)
         {
-            string url = ApiHelper.baseUrl + "ingredient";
+            string url = Config.BaseWeb + "ingredient";
 
             string json = JsonSerializer.Serialize(createIngredient);
             HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");

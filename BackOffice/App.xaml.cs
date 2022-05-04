@@ -8,7 +8,9 @@
 
             Helper.ApiHelper.InitializeClient();
 
-            MainPage = new NavigationPage(new AppShell());
+            MainPage = new AppShell();
+
+            App.Current.UserAppTheme = AppTheme.Light;
 
             Routing.RegisterRoute(nameof(IngredientPage), typeof(IngredientPage));
             Routing.RegisterRoute(nameof(CommandPage), typeof(CommandPage));
