@@ -62,7 +62,7 @@ namespace backendTest.services
         }
 
         [Fact]
-        public async void GetAllCartsTest()
+        public async void TestGetAllCarts()
         {
             // create carts
             await _cartService.CreateCart(new backend.Dto.CreateCart
@@ -76,8 +76,106 @@ namespace backendTest.services
                 Date = new DateTime(2022, 12, 22),
             });
 
-            // create pizzas
+            // create ingredients
+            await _ingredientService.CreateIngredient(new backend.Dto.CreateIngredient
+            {
+                Name = "Dough",
+                IsAvailable = true,
+                Category = "dough",
+            });
+            await _ingredientService.CreateIngredient(new backend.Dto.CreateIngredient
+            {
+                Name = "Cheese",
+                IsAvailable = true,
+                Category = "cheese",
+            });
 
+            // create Dtos to send
+            backend.Dto.AddPizza addPizzaDto = new backend.Dto.AddPizza
+            {
+                Name = "Pizza 1",
+                IngredientIds = new List<int> { 1 },
+            };
+            backend.Dto.AddPizza addPizza2Dto = new backend.Dto.AddPizza
+            {
+                Name = "Pizza 2",
+                IngredientIds = new List<int> { 2 },
+            };
+
+            // add Pizzas to db
+            await _cartService.AddPizzaToCart(1, addPizzaDto);
+            await _cartService.AddPizzaToCart(2, addPizza2Dto);
+
+            // getCarts
+            List<backend.Dto.CartPizzaIngredient> carts = await _cartService.GetAllCarts();
+
+            // Verification cart1
+            Assert.Equal(2, carts.Count());
+            Assert.Equal("in creation", carts[0].Status);
+            Assert.Single(carts[0].Pizzas);
+            Assert.Equal("Pizza 1", carts[0].Pizzas[0].Name);
+            Assert.Single(carts[0].Pizzas[0].Ingredients);
+            Assert.Equal("Dough", carts[0].Pizzas[0].Ingredients[0].Name);
+
+            // Verification cart2
+            Assert.Equal("served", carts[1].Status);
+            Assert.Single(carts[1].Pizzas);
+            Assert.Equal("Pizza 2", carts[1].Pizzas[0].Name);
+            Assert.Single(carts[1].Pizzas[0].Ingredients);
+            Assert.Equal("Cheese", carts[1].Pizzas[0].Ingredients[0].Name);
+        }
+
+        [Fact]
+        public async void TestGetCart()
+        {
+            // create cart
+            await _cartService.CreateCart(new backend.Dto.CreateCart
+            {
+                Status = "in creation",
+                Date = new DateTime(2022, 12, 20),
+            });
+
+            // create ingredients
+            await _ingredientService.CreateIngredient(new backend.Dto.CreateIngredient
+            {
+                Name = "Dough",
+                IsAvailable = true,
+                Category = "dough",
+            });
+            await _ingredientService.CreateIngredient(new backend.Dto.CreateIngredient
+            {
+                Name = "Cheese",
+                IsAvailable = true,
+                Category = "cheese",
+            });
+
+            // create Dtos to send
+            backend.Dto.AddPizza addPizzaDto = new backend.Dto.AddPizza
+            {
+                Name = "Pizza 1",
+                IngredientIds = new List<int> { 1 },
+            };
+            backend.Dto.AddPizza addPizza2Dto = new backend.Dto.AddPizza
+            {
+                Name = "Pizza 2",
+                IngredientIds = new List<int> { 2 },
+            };
+
+            // add Pizzas to db
+            await _cartService.AddPizzaToCart(1, addPizzaDto);
+            await _cartService.AddPizzaToCart(2, addPizza2Dto);
+
+            // getCarts
+            backend.Dto.CartPizzaIngredient cart = await _cartService.GetCart(1);
+
+
+            // Verification cart
+            Assert.NotNull(cart);
+            Assert.Equal("in creation", cart.Status);
+            Assert.Single(cart.Pizzas);
+            Assert.Equal("Pizza 1", cart.Pizzas[0].Name);
+            Assert.Single(cart.Pizzas[0].Ingredients);
+            Assert.Equal("Dough", cart.Pizzas[0].Ingredients[0].Name);
         }
 
         [Fact]
@@ -136,7 +234,7 @@ namespace backendTest.services
         }
 
         [Fact]
-        public async void GetTodayCarts()
+        public async void TestGetTodayCarts()
         {
             DateTime dateTime = DateTime.Now.AddHours(-1);
             DateTime dateTime2 = DateTime.Now.AddHours(-2);
@@ -160,7 +258,7 @@ namespace backendTest.services
         }
 
         [Fact]
-        public async void AddPizzaToCartTest()
+        public async void TestAddPizzaToCart()
         {
             // create cart
             await _cartService.CreateCart(new backend.Dto.CreateCart
