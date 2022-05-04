@@ -16,7 +16,6 @@ namespace backendTest.repository
     {
         private readonly IPizzaRepository _pizzaRepository;
         private readonly DbContextOptions<myPizzaMakerContext> _options;
-        private readonly IMapper _mapper;
 
         public PizzaRepositoryTest()
         {
@@ -41,7 +40,12 @@ namespace backendTest.repository
             // automapper
             services.AddAutoMapper(typeof(AutomapperProfiles));
 
+            services.AddTransient<ICartRepository, CartRepository>();
+            services.AddTransient<IIngredientRepository, IngredientRepository>();
             services.AddTransient<IPizzaRepository, PizzaRepository>();
+            services.AddTransient<backend.Service.Interfaces.IIngredientService, backend.Service.IngredientService>();
+            services.AddTransient<backend.Service.Interfaces.ICartService, backend.Service.CartService>();
+            services.AddTransient<backend.Service.Interfaces.IStatsService, backend.Service.StatsService>();
             var serviceProvider = services.BuildServiceProvider();
             _pizzaRepository = serviceProvider.GetService<IPizzaRepository>();
         }
@@ -138,6 +142,7 @@ namespace backendTest.repository
                     IsAvailable = true,
                     Category = "meat",
                 });
+
                 // add to pizzaIngredients
                 context.PizzasIngredients.Add(new PizzasIngredient
                 {
@@ -162,8 +167,8 @@ namespace backendTest.repository
                 List<backend.Dbo.Ingredient> pizzaIngredients = _pizzaRepository.GetPizzaIngredients(1);
                 Assert.Equal(3, pizzaIngredients.Count());
                 Assert.Equal("Tomato", pizzaIngredients[0].Name);
-                Assert.Equal("Dough Dough", pizzaIngredients[0].Name);
-                Assert.Equal("Beef", pizzaIngredients[0].Name);
+                Assert.Equal("Dough Dough", pizzaIngredients[1].Name);
+                Assert.Equal("Beef", pizzaIngredients[2].Name);
             }
         }
     }
