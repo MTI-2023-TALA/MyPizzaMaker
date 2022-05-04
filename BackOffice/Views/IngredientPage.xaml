@@ -48,6 +48,9 @@
                 Clicked="Button_Clicked" />
 
             </VerticalStackLayout>
+            <Label Text="AUTRE"></Label>
+
         </VerticalStackLayout>
+
     </ScrollView>
 </ContentPage>

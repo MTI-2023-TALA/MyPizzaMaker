@@ -15,9 +15,9 @@ namespace BackOffice.ViewModal
 
         public ShellViewModel()
         {
-            Ingredient = new AppSection() { Title = "Ingrédient", Icon = "ingredient.png", TargetType = typeof(IngredientPage) };
-            Command = new AppSection() { Title = "Commandes", Icon = "command.png", TargetType = typeof(CommandPage) };
-            Stats = new AppSection() { Title = "Statistiques", Icon = "stats.png", TargetType = typeof(StatPage) };
+            Ingredient = new AppSection() { Title = "Ingrédient", Icon = "bag.png", TargetType = typeof(IngredientPage) };
+            Command = new AppSection() { Title = "Commandes", Icon = "cart.png", TargetType = typeof(CommandPage) };
+            Stats = new AppSection() { Title = "Statistiques", Icon = "bar_chart.png", TargetType = typeof(StatPage) };
         }
     }
 }

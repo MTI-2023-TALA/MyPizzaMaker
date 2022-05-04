@@ -1,15 +1,16 @@
-﻿using BackOffice.Service;
-
-namespace BackOffice
+﻿namespace BackOffice
 {
     public static class MauiProgram
     {
         public static MauiApp CreateMauiApp()
         {
+            CategoryHelper.PopulateMap();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
                 .ConfigureService()
+                .ConfigureViewModels()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
