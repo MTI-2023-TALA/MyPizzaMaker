@@ -10,7 +10,7 @@ namespace BackOffice.ViewModal
     {
         public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<IngredientModel>();
+            builder.Services.AddTransient<IngredientModel>();
             builder.Services.AddSingleton<ShellViewModel>();
             return builder;
         }

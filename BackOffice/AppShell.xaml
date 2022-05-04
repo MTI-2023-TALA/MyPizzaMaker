@@ -3,15 +3,15 @@
     x:Class="BackOffice.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BackOffice"
+    xmlns:pages="clr-namespace:BackOffice"
     xmlns:viewmodels="clr-namespace:BackOffice.ViewModal"
     x:DataType="viewmodels:ShellViewModel"
     Shell.FlyoutBehavior="Disabled">
     <Shell.Resources />
 
     <TabBar>
-        <ShellContent Title="{Binding Ingredient.Title}" Icon="{Binding Ingredient.Icon}" ContentTemplate="{DataTemplate local:IngredientPage}" />
-        <ShellContent Title="{Binding Command.Title}" Icon="{Binding Command.Icon}" ContentTemplate="{DataTemplate local:CommandPage}" />
-        <ShellContent Title="{Binding Stats.Title}" Icon="{Binding Stats.Icon}" ContentTemplate="{DataTemplate local:StatPage}" />
+        <ShellContent Title="{Binding Ingredient.Title}" Icon="{Binding Ingredient.Icon}" ContentTemplate="{DataTemplate pages:IngredientPage}" />
+        <ShellContent Title="{Binding Command.Title}" Icon="{Binding Command.Icon}" ContentTemplate="{DataTemplate pages:CommandPage}" />
+        <ShellContent Title="{Binding Stats.Title}" Icon="{Binding Stats.Icon}" ContentTemplate="{DataTemplate pages:StatPage}" />
     </TabBar>
 </Shell>

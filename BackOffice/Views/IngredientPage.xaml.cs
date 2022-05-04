@@ -9,24 +9,26 @@ namespace BackOffice
     {
         private IngredientService _ingredientService;
         public List<Ingredient> Ingredients;
+        private IngredientModel viewModel => BindingContext as IngredientModel;
 
-        public IngredientPage()
+
+        public IngredientPage(IngredientModel vm, IngredientService ingredientService)
         {
             InitializeComponent();
-            _ingredientService = new IngredientService();
-            BindingContext = new IngredientModel();
+            _ingredientService = ingredientService;
+            BindingContext = vm;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             Ingredients = await _ingredientService.LoadIngredients();
-            
+            Console.WriteLine(Ingredients.Count);
+            viewModel.Ingredients.ReplaceRange(Ingredients);
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine(Ingredients.Count);
             CreateIngredient createIngredient = new CreateIngredient();
             createIngredient.Name = name.Text;
             createIngredient.Category = CategoryHelper.TranslateCategory((string)category.ItemsSource[category.SelectedIndex]);
@@ -35,6 +37,7 @@ namespace BackOffice
             name.Text = "";
             await _ingredientService.CreateIngredient(createIngredient);
             Ingredients = await _ingredientService.LoadIngredients();
+            viewModel.Ingredients.ReplaceRange(Ingredients);
         }
     }
 }

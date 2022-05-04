@@ -9,7 +9,9 @@
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .ConfigureService()
+                .ConfigureEssentials()
+                .ConfigureServices()
+                .ConfigureViews()
                 .ConfigureViewModels()
                 .ConfigureFonts(fonts =>
                 {

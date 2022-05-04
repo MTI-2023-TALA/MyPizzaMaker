@@ -8,7 +8,7 @@ namespace BackOffice.Service
 {
     public static class ServicesExtensions
     {
-        public static MauiAppBuilder ConfigureService(this MauiAppBuilder builder)
+        public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<IngredientService>();
 

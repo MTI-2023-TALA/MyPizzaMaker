@@ -1,5 +1,6 @@
 ﻿using backend.Dto;
 using BackOffice.Models;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,14 @@ using System.Threading.Tasks;
 
 namespace BackOffice.ViewModal
 {
-    internal class IngredientModel
+    public class IngredientModel
     {
-        public List<Ingredient> Ingredients;
-        public string Test;
+        public ObservableRangeCollection<Ingredient> Ingredients { get; set; }
 
         public IngredientModel()
         {
-            Ingredients = new List<Ingredient>();
+            Ingredients = new ObservableRangeCollection<Ingredient>();
             Ingredients.Add(new Ingredient());
-            Test = "Test";
         }
     }
 }

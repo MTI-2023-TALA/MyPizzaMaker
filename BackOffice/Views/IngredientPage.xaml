@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BackOffice.IngredientPage"
              xmlns:viewmodels="clr-namespace:BackOffice.ViewModal"
-             Title="Ingrédients">
-    <ContentPage.BindingContext>
-        <viewmodels:IngredientModel />
-    </ContentPage.BindingContext>
+             xmlns:dto="clr-namespace:backend.Dto"
+             x:DataType="viewmodels:IngredientModel"
+             Title="Ingrédients"
+             x:Name="self">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
             <VerticalStackLayout BackgroundColor="LightGray" Spacing="10" Padding="20">
@@ -53,14 +53,16 @@
             </VerticalStackLayout>
             <CollectionView ItemsSource="{Binding Ingredients}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="1 INGREDIENT"/>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="{Binding Name}"></Label>
+                            <Label Text="{Binding Category}"></Label>
+                            <Label Text="{Binding IsAvailable}"></Label>
+                        </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
 
-            <Label Text="Hello !"/>
-            <Label Text="{Binding Test}"/>
+            </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
