@@ -61,8 +61,7 @@ namespace backendTest.services
             context.Dispose();
         }
 
-        [Fact]
-        public async void TestGetAllCarts()
+        private async void PopulateDB()
         {
             // create carts
             await _cartService.CreateCart(new backend.Dto.CreateCart
@@ -105,6 +104,12 @@ namespace backendTest.services
             // add Pizzas to db
             await _cartService.AddPizzaToCart(1, addPizzaDto);
             await _cartService.AddPizzaToCart(2, addPizza2Dto);
+        }
+
+        [Fact]
+        public async void TestGetAllCarts()
+        {
+            PopulateDB();
 
             // getCarts
             List<backend.Dto.CartPizzaIngredient> carts = await _cartService.GetAllCarts();
@@ -128,46 +133,10 @@ namespace backendTest.services
         [Fact]
         public async void TestGetCart()
         {
-            // create cart
-            await _cartService.CreateCart(new backend.Dto.CreateCart
-            {
-                Status = "in creation",
-                Date = new DateTime(2022, 12, 20),
-            });
-
-            // create ingredients
-            await _ingredientService.CreateIngredient(new backend.Dto.CreateIngredient
-            {
-                Name = "Dough",
-                IsAvailable = true,
-                Category = "dough",
-            });
-            await _ingredientService.CreateIngredient(new backend.Dto.CreateIngredient
-            {
-                Name = "Cheese",
-                IsAvailable = true,
-                Category = "cheese",
-            });
-
-            // create Dtos to send
-            backend.Dto.AddPizza addPizzaDto = new backend.Dto.AddPizza
-            {
-                Name = "Pizza 1",
-                IngredientIds = new List<int> { 1 },
-            };
-            backend.Dto.AddPizza addPizza2Dto = new backend.Dto.AddPizza
-            {
-                Name = "Pizza 2",
-                IngredientIds = new List<int> { 2 },
-            };
-
-            // add Pizzas to db
-            await _cartService.AddPizzaToCart(1, addPizzaDto);
-            await _cartService.AddPizzaToCart(2, addPizza2Dto);
+            PopulateDB();
 
             // getCarts
             backend.Dto.CartPizzaIngredient cart = await _cartService.GetCart(1);
-
 
             // Verification cart
             Assert.NotNull(cart);
