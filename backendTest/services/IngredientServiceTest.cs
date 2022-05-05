@@ -7,17 +7,13 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace backendTest.services
 {
     public class IngredientServiceTest : IDisposable
     {
-        private readonly ICartService _cartService;
         private readonly IIngredientService _ingredientService;
-        private readonly IStatsService _statsService;
 
         private readonly DbContextOptions<myPizzaMakerContext> _options;
 
@@ -50,9 +46,7 @@ namespace backendTest.services
             services.AddTransient<ICartService, backend.Service.CartService>();
             services.AddTransient<IStatsService, backend.Service.StatsService>();
             var serviceProvider = services.BuildServiceProvider();
-            _cartService = serviceProvider.GetService<ICartService>();
             _ingredientService = serviceProvider.GetService<IIngredientService>();
-            _statsService = serviceProvider.GetService<IStatsService>();
         }
 
         public void Dispose()

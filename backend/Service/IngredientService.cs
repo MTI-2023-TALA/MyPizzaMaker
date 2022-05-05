@@ -10,7 +10,6 @@ namespace backend.Service
         private readonly IIngredientRepository _ingredientRepository;
         protected readonly IMapper _mapper;
 
-
         public IngredientService(IIngredientRepository ingredientRepository, ILogger<IngredientService> logger, IMapper mapper)
         {
             _ingredientRepository = ingredientRepository;
