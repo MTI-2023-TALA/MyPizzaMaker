@@ -36,5 +36,13 @@ namespace BackOffice
             await _ingredientService.CreateIngredient(createIngredient);
             await viewModel.LoadIngredients();
         }
+
+        private async void DeleteObject(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var ingredient = button.BindingContext as Ingredient;
+            await _ingredientService.DeleteIngredient(ingredient.Id);
+            await viewModel.LoadIngredients();
+        }
     }
 }

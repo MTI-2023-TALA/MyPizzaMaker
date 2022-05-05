@@ -62,9 +62,10 @@
                             <Label Text="{Binding IsAvailable}" 
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center" />
-                            <Button Text="Supprimer"
+                            <Button Text="Supprimer l'ingrédient"
                                     VerticalOptions="Center"
-                                    HorizontalOptions="Center" />
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject"/>
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -76,9 +77,10 @@
                         <HorizontalStackLayout Spacing="20" HeightRequest="50">
                             <Label Text="{Binding Name}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer"
+                            <Button Text="Supprimer l'ingrédient"
                                     VerticalOptions="Center"
-                                    HorizontalOptions="Center" />
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject" />
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -87,10 +89,13 @@
             <CollectionView ItemsSource="{Binding CheeseIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
                             <Label Text="{Binding Name}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingredient"></Button>
+                            <Button Text="Supprimer l'ingrédient"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject"></Button>
 
                         </HorizontalStackLayout>
                     </DataTemplate>
@@ -100,10 +105,13 @@
             <CollectionView ItemsSource="{Binding SauceIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
                             <Label Text="{Binding Name}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingredient"></Button>
+                            <Button Text="Supprimer l'ingrédient"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject"></Button>
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -112,10 +120,13 @@
             <CollectionView ItemsSource="{Binding MeatIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
                             <Label Text="{Binding Name}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingredient"></Button>
+                            <Button Text="Supprimer l'ingrédient"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject"></Button>
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -124,10 +135,13 @@
             <CollectionView ItemsSource="{Binding AccompanimentsIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
                             <Label Text="{Binding Name}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingredient"></Button>
+                            <Button Text="Supprimer l'ingrédient"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject"></Button>
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -136,10 +150,13 @@
             <CollectionView ItemsSource="{Binding DrinkIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
                             <Label Text="{Binding Name}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingredient"></Button>
+                            <Button Text="Supprimer l'ingrédient"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject"></Button>
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -148,10 +165,13 @@
             <CollectionView ItemsSource="{Binding DessertIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
                             <Label Text="{Binding Name}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingredient"></Button>
+                            <Button Text="Supprimer l'ingrédient"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="DeleteObject"></Button>
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

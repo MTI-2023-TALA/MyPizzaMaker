@@ -46,5 +46,21 @@ namespace BackOffice.Service
                 }
             }
         }
+
+        public async Task<bool> DeleteIngredient(int id)
+        {
+            string url = Config.BaseWeb + "ingredient/" + id;
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.DeleteAsync(url))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace BackOffice.ViewModal
 {
     public class IngredientModel
     {
-        private IngredientService _ingredientService;
+        public IngredientService _ingredientService;
         public ObservableRangeCollection<Ingredient> DoughIngredients { get; set; }
         public ObservableRangeCollection<Ingredient> BaseIngredients { get; set; }
         public ObservableRangeCollection<Ingredient> CheeseIngredients { get; set; }
@@ -20,6 +20,8 @@ namespace BackOffice.ViewModal
         public ObservableRangeCollection<Ingredient> AccompanimentsIngredients { get; set; }
         public ObservableRangeCollection<Ingredient> DrinkIngredients { get; set; }
         public ObservableRangeCollection<Ingredient> DessertIngredients { get; set; }
+
+        public Command DeleteIngredient { get; set; }
 
         public async Task LoadIngredients()
         {
