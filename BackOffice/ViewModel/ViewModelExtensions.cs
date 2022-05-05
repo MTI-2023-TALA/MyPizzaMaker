@@ -11,6 +11,7 @@ namespace BackOffice.ViewModal
         public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
         {
             builder.Services.AddTransient<IngredientModel>();
+            builder.Services.AddTransient<CartModel>();
             builder.Services.AddSingleton<ShellViewModel>();
             return builder;
         }

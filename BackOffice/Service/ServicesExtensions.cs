@@ -11,6 +11,7 @@ namespace BackOffice.Service
         public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<IngredientService>();
+            builder.Services.AddSingleton<CartService>();
 
             return builder;
         }
