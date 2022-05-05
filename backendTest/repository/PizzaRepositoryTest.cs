@@ -95,7 +95,7 @@ namespace backendTest.repository
         }
 
         [Fact]
-        public void TestAddPizza()
+        public async void TestAddPizza()
         {
             using (var context = new myPizzaMakerContext(_options))
             {
@@ -104,14 +104,54 @@ namespace backendTest.repository
                     Name = "Pizza To Insert"
                 };
 
-                _pizzaRepository.Insert(pizzaToInsert);
+                backend.Dbo.Pizza insertedPizza = await _pizzaRepository.Insert(pizzaToInsert);
+                Assert.NotNull(insertedPizza);
+                Assert.Equal("Pizza To Insert", insertedPizza.Name);
+            }
+        }
+
+        [Fact]
+        public async void TestUpdatePizza()
+        {
+            using (var context = new myPizzaMakerContext(_options))
+            {
+                backend.Dbo.Pizza pizzaToInsert = new backend.Dbo.Pizza()
+                {
+                    Name = "Pizza To Insert",
+                };
+
+                await _pizzaRepository.Insert(pizzaToInsert);
             }
 
             using (var context = new myPizzaMakerContext(_options))
             {
-                List<backend.Dbo.Pizza> pizzas = _pizzaRepository.GetAllPizzas();
-                Assert.Single(pizzas);
-                Assert.Equal("Pizza To Insert", pizzas[0].Name);
+                backend.Dbo.Pizza pizza = new backend.Dbo.Pizza();
+                pizza.Name = "NewPizzaName";
+                pizza.Id = 1;
+
+                var updatedPizza = await _pizzaRepository.Update(pizza);
+                Assert.NotNull(updatedPizza);
+                Assert.Equal("NewPizzaName", updatedPizza.Name);
+            }
+        }
+
+        [Fact]
+        public async void TestDeletePizza()
+        {
+            using (var context = new myPizzaMakerContext(_options))
+            {
+                backend.Dbo.Pizza pizzaToInsert = new backend.Dbo.Pizza()
+                {
+                    Name = "Pizza To Insert",
+                };
+
+                await _pizzaRepository.Insert(pizzaToInsert);
+            }
+
+            using (var context = new myPizzaMakerContext(_options))
+            {
+                bool isPizzaRemoved = await _pizzaRepository.Delete(1);
+                Assert.True(isPizzaRemoved);
             }
         }
 
@@ -169,6 +209,45 @@ namespace backendTest.repository
                 Assert.Equal("Tomato", pizzaIngredients[0].Name);
                 Assert.Equal("Dough Dough", pizzaIngredients[1].Name);
                 Assert.Equal("Beef", pizzaIngredients[2].Name);
+            }
+        }
+
+        [Fact]
+        public async void TestAddPizzaIngredients()
+        {
+            using (var context = new myPizzaMakerContext(_options))
+            {
+                // create pizza
+                context.Pizzas.Add(new Pizza { Name = "Pizza 42" });
+
+                // create ingredients
+                context.Ingredients.Add(new Ingredient
+                {
+                    Name = "Tomato",
+                    IsAvailable = true,
+                    Category = "base",
+                });
+                context.Ingredients.Add(new Ingredient
+                {
+                    Name = "Dough Dough",
+                    IsAvailable = true,
+                    Category = "dough",
+                });
+                context.Ingredients.Add(new Ingredient
+                {
+                    Name = "Beef",
+                    IsAvailable = true,
+                    Category = "meat",
+                });
+            }
+
+            using (var context = new myPizzaMakerContext(_options))
+            {
+                bool addedPizzaIngredients = await _pizzaRepository.AddPizzaIngredients(1, new List<int>
+                {
+                    1, 2, 3
+                });
+                Assert.True(addedPizzaIngredients);
             }
         }
     }
