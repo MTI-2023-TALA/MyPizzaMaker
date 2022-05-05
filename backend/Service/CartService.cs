@@ -47,6 +47,11 @@ namespace backend.Service
         public async Task<Dto.CartPizzaIngredient> GetCart(int id)
         {
             Dbo.Cart cart = await _cartRepository.GetOne(id);
+            if (cart == null)
+            {
+                return null;
+            }
+
             Dto.CartPizzaIngredient cartPizzaIngredient = GetCartPizzasIngredients(cart);
             if (cartPizzaIngredient == null)
             {

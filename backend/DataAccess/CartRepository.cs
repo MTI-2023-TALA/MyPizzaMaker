@@ -57,7 +57,7 @@ namespace backend.DataAccess
         {
             try
             {
-                var result = _context.Carts.Where(c => c.Date.DayOfYear - DateTime.Today.DayOfYear <= 7);
+                var result = _context.Carts.Where(c => DateTime.Today.DayOfYear - c.Date.DayOfYear <= 7);
                 return result.Count();
             }
             catch (Exception e)
