@@ -51,18 +51,112 @@
                 Clicked="Button_Clicked" />
 
             </VerticalStackLayout>
-            <CollectionView ItemsSource="{Binding Ingredients}">
+            <Label Text="Pâte" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding DoughIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
+                            <Label Text="{Binding Name}"      
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                            <Label Text="{Binding IsAvailable}" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                            <Button Text="Supprimer"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Base" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding BaseIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
+                            <Label Text="{Binding Name}"></Label>
+                            <Label Text="{Binding IsAvailable}"></Label>
+                            <Button Text="Supprimer"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Fromage" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding CheeseIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
                         <HorizontalStackLayout Spacing="20">
                             <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding Category}"></Label>
                             <Label Text="{Binding IsAvailable}"></Label>
+                            <Button Text="Supprimer l'ingredient"></Button>
+
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-
             </CollectionView>
+            <Label Text="Sauce" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding SauceIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="{Binding Name}"></Label>
+                            <Label Text="{Binding IsAvailable}"></Label>
+                            <Button Text="Supprimer l'ingredient"></Button>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Viande" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding MeatIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="{Binding Name}"></Label>
+                            <Label Text="{Binding IsAvailable}"></Label>
+                            <Button Text="Supprimer l'ingredient"></Button>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Accompagnements" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding AccompanimentsIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="{Binding Name}"></Label>
+                            <Label Text="{Binding IsAvailable}"></Label>
+                            <Button Text="Supprimer l'ingredient"></Button>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Boisson" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding DrinkIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="{Binding Name}"></Label>
+                            <Label Text="{Binding IsAvailable}"></Label>
+                            <Button Text="Supprimer l'ingredient"></Button>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="Dessert" FontSize="Large" />
+            <CollectionView ItemsSource="{Binding DessertIngredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:Ingredient">
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="{Binding Name}"></Label>
+                            <Label Text="{Binding IsAvailable}"></Label>
+                            <Button Text="Supprimer l'ingredient"></Button>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

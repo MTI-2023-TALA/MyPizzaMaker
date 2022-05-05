@@ -22,9 +22,7 @@ namespace BackOffice
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            Ingredients = await _ingredientService.LoadIngredients();
-            Console.WriteLine(Ingredients.Count);
-            viewModel.Ingredients.ReplaceRange(Ingredients);
+            await viewModel.LoadIngredients();
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -36,8 +34,7 @@ namespace BackOffice
 
             name.Text = "";
             await _ingredientService.CreateIngredient(createIngredient);
-            Ingredients = await _ingredientService.LoadIngredients();
-            viewModel.Ingredients.ReplaceRange(Ingredients);
+            await viewModel.LoadIngredients();
         }
     }
 }

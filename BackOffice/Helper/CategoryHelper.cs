@@ -21,7 +21,7 @@ namespace BackOffice.Helper
             map.Add("drink", "boisson");
             map.Add("dessert", "dessert");
 
-            map.Add("pâte", "dought");
+            map.Add("pâte", "dough");
             map.Add("fromage", "cheese");
             map.Add("viande", "meat");
             map.Add("accompagnements", "accompaniments");
