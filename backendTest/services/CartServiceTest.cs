@@ -215,12 +215,28 @@ namespace backendTest.services
         [Fact]
         public async void TestGetTodayCarts()
         {
-            DateTime dateTime = DateTime.Now.AddHours(-1);
-            DateTime dateTime2 = DateTime.Now.AddHours(-2);
+            DateTime now = DateTime.Now;
+            DateTime dateTime1 = new DateTime(
+                now.Year,
+                now.Month,
+                now.Day,
+                now.Hour % 2 == 0 ? 5 : 17,
+                now.Minute,
+                0
+            );
+            DateTime dateTime2 = new DateTime(
+                now.Year,
+                now.Month,
+                now.Day,
+                now.Hour % 2 == 0 ? 3 : 13,
+                now.Minute,
+                0
+            );
+
             await _cartService.CreateCart(new backend.Dto.CreateCart
             {
                 Status = "in creation",
-                Date = dateTime,
+                Date = dateTime1,
             });
             await _cartService.CreateCart(new backend.Dto.CreateCart
             {
@@ -230,7 +246,7 @@ namespace backendTest.services
 
             var todayCarts = await _cartService.GetTodayCarts();
             Assert.Equal(2, todayCarts.Count());
-            Assert.Equal(dateTime, todayCarts[0].Date);
+            Assert.Equal(dateTime1, todayCarts[0].Date);
             Assert.Equal("in creation", todayCarts[0].Status);
             Assert.Equal(dateTime2, todayCarts[1].Date);
             Assert.Equal("served", todayCarts[1].Status);

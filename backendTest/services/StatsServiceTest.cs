@@ -67,13 +67,27 @@ namespace backendTest.services
         public async void TestGetDailyStats()
         {
             DateTime now = DateTime.Now;
-            DateTime dateTime = now.AddHours(-1);
-            DateTime dateTime2 = now.AddHours(-2);
+            DateTime dateTime1 = new DateTime(
+                now.Year,
+                now.Month,
+                now.Day,
+                now.Hour % 2 == 0 ? 5 : 17,
+                now.Minute,
+                0
+            );
+            DateTime dateTime2 = new DateTime(
+                now.Year,
+                now.Month,
+                now.Day,
+                now.Hour % 2 == 0 ? 3 : 13,
+                now.Minute,
+                0
+            );
 
             await _cartService.CreateCart(new backend.Dto.CreateCart
             {
                 Status = "in creation",
-                Date = dateTime,
+                Date = dateTime1,
             });
             await _cartService.CreateCart(new backend.Dto.CreateCart
             {
