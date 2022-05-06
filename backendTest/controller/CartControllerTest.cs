@@ -55,7 +55,6 @@ namespace backendTest.controller
 
             _cartService = serviceProvider.GetService<ICartService>();
             _ingredientService = serviceProvider.GetService<IIngredientService>();
-            _statsService = serviceProvider.GetService<IStatsService>();
 
             _cartController = new CartController(_cartService, null);
         }
