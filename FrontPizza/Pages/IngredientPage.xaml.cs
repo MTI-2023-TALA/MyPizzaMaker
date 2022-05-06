@@ -46,7 +46,9 @@ public partial class IngredientPage : ContentPage
 
 		await viewModel.AddPizza(pizzaName, ingredientId);
 		await viewModel.LoadIngredients();
-    }
+
+		selectedIngredientIds.Clear();
+	}
 
 	private async void ConfirmCommand(object sender, EventArgs e)
     {

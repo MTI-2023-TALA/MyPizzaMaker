@@ -8,6 +8,6 @@ namespace FrontPizza
 {
     public class Config
     {
-        public static string BaseWeb = "https://localhost:7028/";
+        public static string BaseWeb = "https://localhost:44309/";
     }
 }

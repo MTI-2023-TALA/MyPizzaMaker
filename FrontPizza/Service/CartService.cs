@@ -31,7 +31,7 @@ namespace FrontPizza.Service
             }
         }
 
-        public async Task<backend.Dto.Cart> GetCart(int id)
+        public async Task<backend.Dto.CartPizzaIngredient> GetCart(int id)
         {
             string url = Config.BaseWeb + "cart/" + id;
 
@@ -39,7 +39,7 @@ namespace FrontPizza.Service
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<backend.Dto.Cart>();
+                    return await response.Content.ReadFromJsonAsync<backend.Dto.CartPizzaIngredient>();
                 } else
                 {
                     throw new Exception(response.ReasonPhrase);
