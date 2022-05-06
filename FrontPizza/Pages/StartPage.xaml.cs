@@ -6,4 +6,10 @@ public partial class StartPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void StartCommand(object sender, EventArgs e)
+    {
+		// TODO: Get cartId and send it;
+		Navigation.PushAsync(new IngredientPage());
+    }
 }

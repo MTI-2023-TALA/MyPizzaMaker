@@ -4,7 +4,7 @@
              x:Class="FrontPizza.ConfirmationPage"
              Title="ConfirmationPage">
     <StackLayout>
-        <Label Text="Welcome to .NET MAUI!"
+        <Label Text="Welcome to ConfirmationPage!"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
     </StackLayout>

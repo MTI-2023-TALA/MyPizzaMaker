@@ -7,5 +7,11 @@
         <Label Text="Welcome to StartPage"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
+        <Button VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Text="Créer une commandes"
+                Clicked="StartCommand"
+                ></Button>
+        
     </StackLayout>
 </ContentPage>
