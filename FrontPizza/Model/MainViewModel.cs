@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,32 @@ namespace FrontPizza.Model
 {
     public class MainViewModel
     {
-        public int Id { get; set; }
+        private IngredientService _ingredientService;
+        private CartService _cartService;
 
-        public MainViewModel(int id)
+        public int Id { get; set; }
+        public ObservableRangeCollection<backend.Dto.Ingredient> Ingredients { get; set; }
+
+        public async Task LoadIngredients()
         {
-            this.Id = id;
+            Ingredients.Clear();
+
+            List<backend.Dto.Ingredient> ingredients = await _ingredientService.LoadIngredients();
+            foreach (var ingredient in ingredients)
+            {
+                if (ingredient.IsAvailable)
+                {
+                    Ingredients.Add(ingredient);
+                }
+            }
+        }
+
+        public MainViewModel(int Id)
+        {
+            _ingredientService = new IngredientService();
+            _cartService = new CartService();
+            this.Id = Id;
+            this.Ingredients = new ObservableRangeCollection<backend.Dto.Ingredient>();
         }
     }
 }
