@@ -1,5 +1,4 @@
-﻿using backend;
-using backend.Controllers;
+﻿using backend.Controllers;
 using backend.DataAccess;
 using backend.DataAccess.EfModels;
 using backend.Service.Interfaces;
@@ -9,9 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace backendTest.controller
@@ -22,7 +18,6 @@ namespace backendTest.controller
 
         private readonly ICartService _cartService;
         private readonly IIngredientService _ingredientService;
-        private readonly IStatsService _statsService;
 
         private readonly DbContextOptions<myPizzaMakerContext> _options;
 
