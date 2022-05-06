@@ -7,34 +7,53 @@
              x:DataType="viewmodels:StatsModel"
              Title="Statistiques"
              x:Name="self">
-    <StackLayout>
+    <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Commande journalière : " FontSize="Large"></Label>
-                <Label Text="{Binding Daily}" FontSize="Large"></Label>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Commande hebdomadaire : " FontSize="Large"></Label>
-                <Label Text="{Binding Weekly}" FontSize="Large"></Label>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Commande mensuelle : " FontSize="Large"></Label>
-                <Label Text="{Binding Monthly}" FontSize="Large"></Label>
-            </HorizontalStackLayout>
+                <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                    <ScrollView>
+                        <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                            <Label Text="Commande journalière : " FontSize="Large"></Label>
+                            <Label Text="{Binding Daily}" FontSize="Large"></Label>
+                        </HorizontalStackLayout>
+                    </ScrollView>
+                </Frame>
+
+            <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                <ContentView>
+                    <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                        <Label Text="Commande hebdomadaire : " FontSize="Large"></Label>
+                        <Label Text="{Binding Weekly}" FontSize="Large"></Label>
+                    </HorizontalStackLayout>
+                </ContentView>
+            </Frame>
+
+            <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                <ContentView>
+                    <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                        <Label Text="Commande mensuelle : " FontSize="Large"></Label>
+                        <Label Text="{Binding Monthly}" FontSize="Large"></Label>
+                    </HorizontalStackLayout>
+                </ContentView>
+            </Frame>
+
             <Label Text="Utilisation des ingrédients : " FontSize="Large"></Label>
             <CollectionView ItemsSource="{Binding Ingredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:IngredientStat">
                         <VerticalStackLayout Spacing="25" Padding="30">
-                            <HorizontalStackLayout Spacing="10">
-                                <Label Text="{Binding name}" FontSize="Medium"></Label>
-                                <Label Text=":" FontSize="Medium"></Label>
-                                <Label Text="{Binding count}" FontSize="Medium"></Label>
-                            </HorizontalStackLayout> 
+                            <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                                <ContentView>
+                                    <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                        <Label Text="{Binding name}" FontSize="Medium"></Label>
+                                        <Label Text=":" FontSize="Medium"></Label>
+                                        <Label Text="{Binding count}" FontSize="Medium"></Label>
+                                    </HorizontalStackLayout>
+                                </ContentView>
+                            </Frame>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </VerticalStackLayout>
-    </StackLayout>
+    </ScrollView>
 </ContentPage>
