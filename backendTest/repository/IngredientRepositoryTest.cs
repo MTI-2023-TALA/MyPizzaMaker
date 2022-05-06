@@ -7,8 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace backendTest.repository
@@ -141,6 +139,7 @@ namespace backendTest.repository
             PopulateDB();
             await _pizzaRepository.Insert(new backend.Dbo.Pizza{ Name = "PizzaTest 1"});
             await _pizzaRepository.Insert(new backend.Dbo.Pizza{ Name = "PizzaTest 2"});
+
             // add ingredients to pizzaIngredients
             await _pizzaRepository.AddPizzaIngredients(1, new List<int> { 1, 2, 3 });
             await _pizzaRepository.AddPizzaIngredients(2, new List<int> { 1 });

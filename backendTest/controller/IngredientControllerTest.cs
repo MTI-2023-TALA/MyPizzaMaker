@@ -8,21 +8,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace backendTest.controller
 {
-    public class IngredientControllertTest : IDisposable
+    public class IngredientControllerTest : IDisposable
     {
         private readonly IngredientController _ingredientController;
         private readonly IIngredientService _ingredientService;
 
         private readonly DbContextOptions<myPizzaMakerContext> _options;
 
-        public IngredientControllertTest()
+        public IngredientControllerTest()
         {
             var guid = Guid.NewGuid().ToString();
 
