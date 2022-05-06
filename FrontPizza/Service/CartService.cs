@@ -58,7 +58,7 @@ namespace FrontPizza.Service
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<bool>();
+                    return true;
                 } else
                 {
                     throw new Exception(response.ReasonPhrase);
