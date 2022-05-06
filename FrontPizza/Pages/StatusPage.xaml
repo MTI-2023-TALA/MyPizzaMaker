@@ -6,41 +6,56 @@
              xmlns:dto="clr-namespace:backend.Dto"
              x:DataType="viewmodels:StatusViewModel"
              Title="StatusPage">
+    <ScrollView>
         <StackLayout>
             <HorizontalStackLayout>
-                <Label Text="Votre commande est la n°"
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Votre commande est la n°"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
-                <Label Text="{Binding Id}"
+                        <Label Text="{Binding Id}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label Text="Votre commande est actuellement :"
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Votre commande est actuellement :"
                         VerticalOptions="Center"
                         HorizontalOptions="Center" />
-                <Label Text="{Binding Status}"
+                        <Label Text="{Binding Status}"
                         VerticalOptions="Center" 
                         HorizontalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <Button Text="Actualiser" Clicked="Reload" />
             </HorizontalStackLayout>
-        <ScrollView>
             <CollectionView ItemsSource="{Binding Pizzas}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodels:PizzaModel">
-                            <StackLayout Padding="20" Spacing="20">
-                                <Label Text="{Binding Name}"/>
-                                <CollectionView ItemsSource="{Binding Ingredients}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="dto:Ingredient">
-                                            <Label Text="{Binding Name}"/>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-        </ScrollView>
-                
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"></LinearItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:PizzaModel">
+                        <ContentView>
+                            <Grid RowSpacing="25" RowDefinitions="Auto,Auto,*" Padding="{OnPlatform Default='30' }" BackgroundColor="AliceBlue" Margin="50">
+                                <ScrollView HeightRequest="300">
+                                    <StackLayout>
+                                        <Label Text="{Binding Name}" FontSize="Title" />
+                                        <CollectionView ItemsSource="{Binding Ingredients}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="dto:Ingredient">
+                                                    <ContentView>
+                                                        <Label Text="{Binding Name}"/>
+                                                    </ContentView>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </StackLayout>
+                                </ScrollView>
+                            </Grid>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
+    </ScrollView>
 </ContentPage>

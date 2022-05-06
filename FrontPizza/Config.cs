@@ -8,6 +8,7 @@ namespace FrontPizza
 {
     public class Config
     {
-        public static string BaseWeb = "https://localhost:44309/";
+        public static string Base = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2" : "https://localhost";
+        public static string BaseWeb = $"{Base}:7028/";
     }
 }

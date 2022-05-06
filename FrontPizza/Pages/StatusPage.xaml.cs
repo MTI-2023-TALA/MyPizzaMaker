@@ -16,4 +16,9 @@ public partial class StatusPage : ContentPage
         base.OnAppearing();
 		await viewModel.LoadCart();
     }
+
+    private async void Reload(object sender, EventArgs e)
+    {
+		await viewModel.LoadCart();
+    }
 }

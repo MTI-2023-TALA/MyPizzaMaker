@@ -1,4 +1,5 @@
 ﻿namespace FrontPizza
+
 {
     public static class MauiProgram
     {
