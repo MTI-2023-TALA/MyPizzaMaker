@@ -10,12 +10,12 @@
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
                 <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
-                    <ScrollView>
+                    <ContentView>
                         <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
                             <Label Text="Commande journalière : " FontSize="Large"></Label>
                             <Label Text="{Binding Daily}" FontSize="Large"></Label>
                         </HorizontalStackLayout>
-                    </ScrollView>
+                    </ContentView>
                 </Frame>
 
             <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
