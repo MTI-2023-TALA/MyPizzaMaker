@@ -13,8 +13,8 @@ namespace FrontPizza.Service
         public async Task<backend.Dto.Cart> CreateCart()
         {
             var cart = new backend.Dto.CreateCart();
-            cart.Date = DateTime.Now;
             cart.Status = "in creation";
+            cart.Date = DateTime.Now;
 
             string url = Config.BaseWeb + "cart";
             string json = JsonSerializer.Serialize(cart);

@@ -126,6 +126,7 @@ namespace backend.Service
             Dbo.Cart cart = new Dbo.Cart();
             cart.Id = id;
             cart.Status = updateCart.Status;
+            cart.Date = DateTime.Now;
 
             var result = await _cartRepository.Update(cart);
             if (result == null)
