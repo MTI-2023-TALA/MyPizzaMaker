@@ -7,8 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace backendTest.repository
@@ -83,7 +81,7 @@ namespace backendTest.repository
         }
 
         [Fact]
-        public async void GetAllIngredientTest()
+        public void GetAllIngredientTest()
         {
             PopulateDB();
 
@@ -117,7 +115,7 @@ namespace backendTest.repository
         }
 
         [Fact]
-        public async void GetIngredientWithCategoryTest()
+        public void GetIngredientWithCategoryTest()
         {
             PopulateDB();
 
@@ -127,7 +125,7 @@ namespace backendTest.repository
         }
 
         [Fact]
-        public async void GetIngredientWithBadCategoryTest()
+        public void GetIngredientWithBadCategoryTest()
         {
             PopulateDB();
 
@@ -141,6 +139,7 @@ namespace backendTest.repository
             PopulateDB();
             await _pizzaRepository.Insert(new backend.Dbo.Pizza{ Name = "PizzaTest 1"});
             await _pizzaRepository.Insert(new backend.Dbo.Pizza{ Name = "PizzaTest 2"});
+
             // add ingredients to pizzaIngredients
             await _pizzaRepository.AddPizzaIngredients(1, new List<int> { 1, 2, 3 });
             await _pizzaRepository.AddPizzaIngredients(2, new List<int> { 1 });
@@ -168,7 +167,7 @@ namespace backendTest.repository
         [InlineData("dessert", true)]
         [InlineData("", false)]
         [InlineData("badCategory", false)]
-        public async void ValidateIngredientCategory(string category, bool expected)
+        public void ValidateIngredientCategoryTest(string category, bool expected)
         {
             bool isCorrectCategory = _ingredientRepository.ValidateIngredientCategory(category);
             Assert.Equal(expected, isCorrectCategory);

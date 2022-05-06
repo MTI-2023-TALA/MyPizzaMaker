@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using backend.DataAccess.EfModels;
 using System;
 using Microsoft.Extensions.Logging;
-using AutoMapper;
 using backend.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
