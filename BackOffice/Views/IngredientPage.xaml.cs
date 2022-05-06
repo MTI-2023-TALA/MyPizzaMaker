@@ -39,10 +39,21 @@ namespace BackOffice
 
         private async void DeleteObject(object sender, EventArgs e)
         {
-            var button = sender as Button;
-            var ingredient = button.BindingContext as Ingredient;
+            var button = (Button)sender;
+            var ingredient = (Ingredient)button.BindingContext;
             await _ingredientService.DeleteIngredient(ingredient.Id);
             await viewModel.LoadIngredients();
+        }
+
+        private async void OnChangedDisponibility(object sender, CheckedChangedEventArgs e)
+        {
+            var checkbox = (CheckBox)sender;
+            var ingredient = (Ingredient)checkbox.BindingContext;
+            UpdateIngredient updateIngredient = new UpdateIngredient();
+            updateIngredient.IsAvailable = checkbox.IsChecked;
+            updateIngredient.Category = ingredient.Category;
+            updateIngredient.Name = ingredient.Name;
+            await _ingredientService.UpdateIngredient(updateIngredient, ingredient.Id);
         }
     }
 }

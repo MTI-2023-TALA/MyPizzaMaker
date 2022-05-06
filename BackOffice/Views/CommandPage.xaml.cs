@@ -9,6 +9,11 @@ namespace BackOffice
 	{
 		private CartService _cartService;
 		public List<Cart> Carts;
+		public List<string> Status { get; set; } = new List<string>
+		{
+			"toto",
+			"tata"
+		};
 		private Dictionary<string, string> statusTrad = new Dictionary<string, string>();
 		private CartModel viewModel => BindingContext as CartModel;
 		public CommandPage(CartModel vm, CartService cartService)

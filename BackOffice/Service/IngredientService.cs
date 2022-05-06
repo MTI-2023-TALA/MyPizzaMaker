@@ -62,5 +62,24 @@ namespace BackOffice.Service
                 }
             }
         }
+
+        public async Task UpdateIngredient(UpdateIngredient updateIngredient, int id)
+        {
+            string url = Config.BaseWeb + "ingredient/" + id;
+
+            string json = JsonSerializer.Serialize(updateIngredient);
+            HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.PatchAsync(url, httpContent))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

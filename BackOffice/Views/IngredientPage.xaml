@@ -41,7 +41,7 @@
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout Spacing="5">
-                    <Label Text="Disponible: " />
+                    <Label Text="Disponible : " />
                     <CheckBox x:Name="isAvailable" IsChecked="true"  />
                 </HorizontalStackLayout>
 
@@ -55,18 +55,24 @@
             <CollectionView ItemsSource="{Binding DoughIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"      
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
-                            <Label Text="{Binding IsAvailable}" 
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center" />
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject"/>
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -74,14 +80,24 @@
             <CollectionView ItemsSource="{Binding BaseIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject" />
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -89,15 +105,24 @@
             <CollectionView ItemsSource="{Binding CheeseIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject"></Button>
-
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -105,14 +130,24 @@
             <CollectionView ItemsSource="{Binding SauceIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject"></Button>
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -120,14 +155,24 @@
             <CollectionView ItemsSource="{Binding MeatIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject"></Button>
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -135,29 +180,52 @@
             <CollectionView ItemsSource="{Binding AccompanimentsIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject"></Button>
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Label Text="Boisson" FontSize="Large" />
             <CollectionView ItemsSource="{Binding DrinkIngredients}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject"></Button>
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -165,14 +233,24 @@
             <CollectionView ItemsSource="{Binding DessertIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Ingredient">
-                        <HorizontalStackLayout Spacing="20" HeightRequest="50">
-                            <Label Text="{Binding Name}"></Label>
-                            <Label Text="{Binding IsAvailable}"></Label>
-                            <Button Text="Supprimer l'ingrédient"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Clicked="DeleteObject"></Button>
-                        </HorizontalStackLayout>
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+                            <ContentView>
+                                <HorizontalStackLayout VerticalOptions="Fill" Padding="5" Margin="5" Spacing="20" HeightRequest="50">
+                                    <Label Text="{Binding Name}"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <Label Text="Disponible :"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsAvailable}"
+                                          CheckedChanged="OnChangedDisponibility"></CheckBox>
+                                    <Button Text="Supprimer l'ingrédient"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Clicked="DeleteObject"/>
+                                </HorizontalStackLayout>
+                            </ContentView>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

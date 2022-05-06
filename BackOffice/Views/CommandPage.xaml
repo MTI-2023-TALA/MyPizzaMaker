@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BackOffice.CommandPage"
              xmlns:viewmodels="clr-namespace:BackOffice.ViewModal"
+             xmlns:pages="clr-namespace:BackOffice"
              xmlns:dto="clr-namespace:backend.Dto"
              x:DataType="viewmodels:CartModel"
              Title="Commandes"
@@ -31,11 +32,24 @@
                             <CollectionView ItemsSource="{Binding Pizzas}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="dto:Pizza">
-                                        <VerticalStackLayout BackgroundColor="LightGray" Spacing="25" Padding="30">
+                                        <VerticalStackLayout BackgroundColor="LightGray" Padding="30">
                                             <Label Text="{Binding Name}"
+                                                   FontSize="Subtitle"
                                                    VerticalOptions="Center"
                                                    HorizontalOptions="Center"/>
+                                            <CollectionView ItemsSource="{Binding Ingredients}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="dto:Ingredient">
+                                                        <HorizontalStackLayout>
+                                                            <Label Text="{Binding Name}"
+                                                               VerticalOptions="Center"
+                                                               HorizontalOptions="Center"/>
+                                                        </HorizontalStackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
                                         </VerticalStackLayout>
+                                        
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
