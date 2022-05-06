@@ -9,7 +9,6 @@
 
         public List<string> StatusList { get; set; } = new List<string>
         {
-            "En cours de création",
             "En attente de confirmation",
             "En cours de préparation",
             "A récupérer",

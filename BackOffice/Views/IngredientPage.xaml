@@ -8,8 +8,10 @@
              Title="Ingrédients"
              x:Name="self">
     <ScrollView>
+        
         <VerticalStackLayout Spacing="25" Padding="30">
-            <VerticalStackLayout BackgroundColor="LightGray" Spacing="10" Padding="20">
+            <Frame CornerRadius="5" BackgroundColor="#f0f2f0">
+            <VerticalStackLayout BackgroundColor="#f0f2f0" Spacing="10" Padding="20">
                 <Label 
                 Text="Ajouter un ingrédient"
                 SemanticProperties.HeadingLevel="Level1"
@@ -49,8 +51,10 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Clicked="Button_Clicked" />
+                
 
             </VerticalStackLayout>
+        </Frame>
             <Label Text="Pâte" FontSize="Large" />
             <CollectionView ItemsSource="{Binding DoughIngredients}">
                 <CollectionView.ItemTemplate>

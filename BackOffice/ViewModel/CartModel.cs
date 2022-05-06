@@ -11,7 +11,6 @@ namespace BackOffice.ViewModal
     public class CartModel
     {
         public CartService _cartService;
-        public ObservableRangeCollection<Cart>InCreationCarts { get; set; }
         public ObservableRangeCollection<Cart> WaitingCarts { get; set; }
         public ObservableRangeCollection<Cart> PreparationCarts { get; set; }
         public ObservableRangeCollection<Cart> CollectedCarts { get; set; }
@@ -20,7 +19,6 @@ namespace BackOffice.ViewModal
 
         public async Task LoadCarts()
         {
-            InCreationCarts.Clear();
             WaitingCarts.Clear();
             PreparationCarts.Clear();
             CollectedCarts.Clear();
@@ -31,11 +29,8 @@ namespace BackOffice.ViewModal
 
             foreach (var cart in Carts)
             {
-                if (cart.Status == "in creation")
-                {
-                    InCreationCarts.Add(cart);
-                }
-                else if (cart.Status == "waiting for confirmation")
+
+                if (cart.Status == "waiting for confirmation")
                 {
                     WaitingCarts.Add(cart);
                 }
@@ -62,7 +57,6 @@ namespace BackOffice.ViewModal
         public CartModel(CartService cartService)
         {
             _cartService = cartService;
-            InCreationCarts = new ObservableRangeCollection<Cart>();
             WaitingCarts = new ObservableRangeCollection<Cart>();
             PreparationCarts = new ObservableRangeCollection<Cart>();
             CollectedCarts = new ObservableRangeCollection<Cart>();

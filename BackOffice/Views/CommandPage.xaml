@@ -10,85 +10,72 @@
              x:Name="self">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            <Label Text="En cours de création" FontSize="Large" />
-            <CollectionView ItemsSource="{Binding InCreationCarts}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="dto:Cart">
-                        <VerticalStackLayout BackgroundColor="DarkGray" Spacing="25" Padding="30">
-                            <HorizontalStackLayout Spacing="25" Padding="30">
-                                <Label Text="{Binding Date}"      
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                       FontAttributes="Italic"/>
-                                <Picker x:Name="status"
-                                    Title="Changer le statut"
-                                    TextColor="White"
-                                    TitleColor="Black"
-                                    BackgroundColor="BlueViolet"
-                                    SelectedIndexChanged="OnStatusChanged"
-                                    ItemsSource ="{Binding StatusList}">
-                                </Picker>
-                            </HorizontalStackLayout>
-                            <CollectionView ItemsSource="{Binding Pizzas}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="dto:Pizza">
-                                        <VerticalStackLayout BackgroundColor="LightGray" Padding="30">
-                                            <Label Text="{Binding Name}"
-                                                   FontSize="Subtitle"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                            <CollectionView ItemsSource="{Binding Ingredients}">
-                                                <CollectionView.ItemTemplate>
-                                                    <DataTemplate x:DataType="dto:Ingredient">
-                                                        <HorizontalStackLayout>
-                                                            <Label Text="{Binding Name}"
-                                                               VerticalOptions="Center"
-                                                               HorizontalOptions="Center"/>
-                                                        </HorizontalStackLayout>
-                                                    </DataTemplate>
-                                                </CollectionView.ItemTemplate>
-                                            </CollectionView>
-                                        </VerticalStackLayout>
-                                        
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
+            <Button Text="Actualiser" Clicked="UpdateCarts"/>
+            
             <Label Text="En attente de confirmation" FontSize="Large" />
             <CollectionView ItemsSource="{Binding WaitingCarts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Cart">
-                        <VerticalStackLayout BackgroundColor="DarkGray" Spacing="25" Padding="30">
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0" HeightRequest="800">
                             <HorizontalStackLayout Spacing="25" Padding="30">
-                                <Label Text="{Binding Date}"      
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                       FontAttributes="Italic"/>
-                                <Picker x:Name="status"
-                                    Title="Changer le statut"
-                                    TextColor="White"
-                                    TitleColor="Black"
-                                    BackgroundColor="BlueViolet"
-                                    SelectedIndexChanged="OnStatusChanged"
-                                    ItemsSource ="{Binding StatusList}">
-                                </Picker>
-                            </HorizontalStackLayout>
-                            <CollectionView ItemsSource="{Binding Pizzas}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="dto:Pizza">
-                                        <VerticalStackLayout BackgroundColor="LightGray" Spacing="25" Padding="30">
-                                            <Label Text="{Binding Name}"
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Informations"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       FontSize="Medium"/>
+                                    <Frame CornerRadius="5" BackgroundColor="#d2c6c6">
+                                        <HorizontalStackLayout Spacing="25" Padding="30">
+                                            <VerticalStackLayout Padding="5">
+                                                <Label Text="Effectuée le :"/>
+                                                <Label Text="{Binding Date}"      
                                                    VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
+                                                   HorizontalOptions="Center"
+                                                   FontAttributes="Italic"
+                                                   />
+                                            </VerticalStackLayout>
+                                            <Picker x:Name="status"
+                                            Title="Changer le statut :"
+                                            TextColor="White"
+                                            TitleColor="Black"
+                                            BackgroundColor="BlueViolet"
+                                            SelectedIndexChanged="OnStatusChanged"
+                                            ItemsSource ="{Binding StatusList}">
+                                            </Picker>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Pizzas"      
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        FontSize="Medium"/>
+                                    <CollectionView ItemsSource="{Binding Pizzas}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="dto:Pizza">
+                                                <VerticalStackLayout Spacing="25" Padding="30" WidthRequest="600">
+                                                    <Frame CornerRadius="5" BackgroundColor="#aaeaae">
+                                                        <StackLayout>
+                                                            <Label Text="{Binding Name}"      
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontSize="Subtitle"/>
+                                                            <CollectionView ItemsSource="{Binding Ingredients}">
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="dto:Ingredient">
+                                                                        <Label Text="{Binding Name}"/>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -97,33 +84,66 @@
             <CollectionView ItemsSource="{Binding PreparationCarts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Cart">
-                        <VerticalStackLayout BackgroundColor="DarkGray" Spacing="25" Padding="30">
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0" HeightRequest="800">
                             <HorizontalStackLayout Spacing="25" Padding="30">
-                                <Label Text="{Binding Date}"      
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                       FontAttributes="Italic"/>
-                                <Picker x:Name="status"
-                                    Title="Changer le statut"
-                                    TextColor="White"
-                                    TitleColor="Black"
-                                    BackgroundColor="BlueViolet"
-                                    SelectedIndexChanged="OnStatusChanged"
-                                    ItemsSource ="{Binding StatusList}">
-                                </Picker>
-                            </HorizontalStackLayout>
-                            <CollectionView ItemsSource="{Binding Pizzas}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="dto:Pizza">
-                                        <VerticalStackLayout BackgroundColor="LightGray" Spacing="25" Padding="30">
-                                            <Label Text="{Binding Name}"
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Informations"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       FontSize="Medium"/>
+                                    <Frame CornerRadius="5" BackgroundColor="#d2c6c6">
+                                        <HorizontalStackLayout Spacing="25" Padding="30">
+                                            <VerticalStackLayout Padding="5">
+                                                <Label Text="Effectuée le :"/>
+                                                <Label Text="{Binding Date}"      
                                                    VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
+                                                   HorizontalOptions="Center"
+                                                   FontAttributes="Italic"
+                                                   />
+                                            </VerticalStackLayout>
+                                            <Picker x:Name="status"
+                                            Title="Changer le statut :"
+                                            TextColor="White"
+                                            TitleColor="Black"
+                                            BackgroundColor="BlueViolet"
+                                            SelectedIndexChanged="OnStatusChanged"
+                                            ItemsSource ="{Binding StatusList}">
+                                            </Picker>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Pizzas"      
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        FontSize="Medium"/>
+                                    <CollectionView ItemsSource="{Binding Pizzas}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="dto:Pizza">
+                                                <VerticalStackLayout Spacing="25" Padding="30" WidthRequest="600">
+                                                    <Frame CornerRadius="5" BackgroundColor="#aaeaae">
+                                                        <StackLayout>
+                                                            <Label Text="{Binding Name}"      
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontSize="Subtitle"/>
+                                                            <CollectionView ItemsSource="{Binding Ingredients}">
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="dto:Ingredient">
+                                                                        <Label Text="{Binding Name}"/>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -132,33 +152,66 @@
             <CollectionView ItemsSource="{Binding CollectedCarts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Cart">
-                        <VerticalStackLayout BackgroundColor="DarkGray" Spacing="25" Padding="30">
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0" HeightRequest="800">
                             <HorizontalStackLayout Spacing="25" Padding="30">
-                                <Label Text="{Binding Date}"      
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                       FontAttributes="Italic"/>
-                                <Picker x:Name="status"
-                                    Title="Changer le statut"
-                                    TextColor="White"
-                                    TitleColor="Black"
-                                    BackgroundColor="BlueViolet"
-                                    SelectedIndexChanged="OnStatusChanged"
-                                    ItemsSource ="{Binding StatusList}">
-                                </Picker>
-                            </HorizontalStackLayout>
-                            <CollectionView ItemsSource="{Binding Pizzas}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="dto:Pizza">
-                                        <VerticalStackLayout BackgroundColor="LightGray" Spacing="25" Padding="30">
-                                            <Label Text="{Binding Name}"
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Informations"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       FontSize="Medium"/>
+                                    <Frame CornerRadius="5" BackgroundColor="#d2c6c6">
+                                        <HorizontalStackLayout Spacing="25" Padding="30">
+                                            <VerticalStackLayout Padding="5">
+                                                <Label Text="Effectuée le :"/>
+                                                <Label Text="{Binding Date}"      
                                                    VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
+                                                   HorizontalOptions="Center"
+                                                   FontAttributes="Italic"
+                                                   />
+                                            </VerticalStackLayout>
+                                            <Picker x:Name="status"
+                                            Title="Changer le statut :"
+                                            TextColor="White"
+                                            TitleColor="Black"
+                                            BackgroundColor="BlueViolet"
+                                            SelectedIndexChanged="OnStatusChanged"
+                                            ItemsSource ="{Binding StatusList}">
+                                            </Picker>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Pizzas"      
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        FontSize="Medium"/>
+                                    <CollectionView ItemsSource="{Binding Pizzas}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="dto:Pizza">
+                                                <VerticalStackLayout Spacing="25" Padding="30" WidthRequest="600">
+                                                    <Frame CornerRadius="5" BackgroundColor="#aaeaae">
+                                                        <StackLayout>
+                                                            <Label Text="{Binding Name}"      
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontSize="Subtitle"/>
+                                                            <CollectionView ItemsSource="{Binding Ingredients}">
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="dto:Ingredient">
+                                                                        <Label Text="{Binding Name}"/>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -167,33 +220,66 @@
             <CollectionView ItemsSource="{Binding ServedCarts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Cart">
-                        <VerticalStackLayout BackgroundColor="DarkGray" Spacing="25" Padding="30">
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0" HeightRequest="800">
                             <HorizontalStackLayout Spacing="25" Padding="30">
-                                <Label Text="{Binding Date}"      
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                       FontAttributes="Italic"/>
-                                <Picker x:Name="status"
-                                    Title="Changer le statut"
-                                    TextColor="White"
-                                    TitleColor="Black"
-                                    BackgroundColor="BlueViolet"
-                                    SelectedIndexChanged="OnStatusChanged"
-                                    ItemsSource ="{Binding StatusList}">
-                                </Picker>
-                            </HorizontalStackLayout>
-                            <CollectionView ItemsSource="{Binding Pizzas}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="dto:Pizza">
-                                        <VerticalStackLayout BackgroundColor="LightGray" Spacing="25" Padding="30">
-                                            <Label Text="{Binding Name}"
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Informations"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       FontSize="Medium"/>
+                                    <Frame CornerRadius="5" BackgroundColor="#d2c6c6">
+                                        <HorizontalStackLayout Spacing="25" Padding="30">
+                                            <VerticalStackLayout Padding="5">
+                                                <Label Text="Effectuée le :"/>
+                                                <Label Text="{Binding Date}"      
                                                    VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
+                                                   HorizontalOptions="Center"
+                                                   FontAttributes="Italic"
+                                                   />
+                                            </VerticalStackLayout>
+                                            <Picker x:Name="status"
+                                            Title="Changer le statut :"
+                                            TextColor="White"
+                                            TitleColor="Black"
+                                            BackgroundColor="BlueViolet"
+                                            SelectedIndexChanged="OnStatusChanged"
+                                            ItemsSource ="{Binding StatusList}">
+                                            </Picker>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Pizzas"      
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        FontSize="Medium"/>
+                                    <CollectionView ItemsSource="{Binding Pizzas}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="dto:Pizza">
+                                                <VerticalStackLayout Spacing="25" Padding="30" WidthRequest="600">
+                                                    <Frame CornerRadius="5" BackgroundColor="#aaeaae">
+                                                        <StackLayout>
+                                                            <Label Text="{Binding Name}"      
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontSize="Subtitle"/>
+                                                            <CollectionView ItemsSource="{Binding Ingredients}">
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="dto:Ingredient">
+                                                                        <Label Text="{Binding Name}"/>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -202,33 +288,66 @@
             <CollectionView ItemsSource="{Binding CancelledCarts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:Cart">
-                        <VerticalStackLayout BackgroundColor="DarkGray" Spacing="25" Padding="30">
+                        <Frame CornerRadius="5" BackgroundColor="#f0f2f0" HeightRequest="800">
                             <HorizontalStackLayout Spacing="25" Padding="30">
-                                <Label Text="{Binding Date}"      
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                       FontAttributes="Italic"/>
-                                <Picker x:Name="status"
-                                    Title="Changer le statut"
-                                    TextColor="White"
-                                    TitleColor="Black"
-                                    BackgroundColor="BlueViolet"
-                                    SelectedIndexChanged="OnStatusChanged"
-                                    ItemsSource ="{Binding StatusList}">
-                                </Picker>
-                            </HorizontalStackLayout>
-                            <CollectionView ItemsSource="{Binding Pizzas}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="dto:Pizza">
-                                        <VerticalStackLayout BackgroundColor="LightGray" Spacing="25" Padding="30">
-                                            <Label Text="{Binding Name}"
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Informations"      
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       FontSize="Medium"/>
+                                    <Frame CornerRadius="5" BackgroundColor="#d2c6c6">
+                                        <HorizontalStackLayout Spacing="25" Padding="30">
+                                            <VerticalStackLayout Padding="5">
+                                                <Label Text="Effectuée le :"/>
+                                                <Label Text="{Binding Date}"      
                                                    VerticalOptions="Center"
-                                                   HorizontalOptions="Center"/>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
+                                                   HorizontalOptions="Center"
+                                                   FontAttributes="Italic"
+                                                   />
+                                            </VerticalStackLayout>
+                                            <Picker x:Name="status"
+                                            Title="Changer le statut :"
+                                            TextColor="White"
+                                            TitleColor="Black"
+                                            BackgroundColor="BlueViolet"
+                                            SelectedIndexChanged="OnStatusChanged"
+                                            ItemsSource ="{Binding StatusList}">
+                                            </Picker>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="25" Padding="30">
+                                    <Label Text="Pizzas"      
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        FontSize="Medium"/>
+                                    <CollectionView ItemsSource="{Binding Pizzas}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="dto:Pizza">
+                                                <VerticalStackLayout Spacing="25" Padding="30" WidthRequest="600">
+                                                    <Frame CornerRadius="5" BackgroundColor="#aaeaae">
+                                                        <StackLayout>
+                                                            <Label Text="{Binding Name}"      
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontSize="Subtitle"/>
+                                                            <CollectionView ItemsSource="{Binding Ingredients}">
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="dto:Ingredient">
+                                                                        <Label Text="{Binding Name}"/>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

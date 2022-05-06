@@ -21,7 +21,6 @@ namespace BackOffice
 			InitializeComponent();
 			_cartService = cartService;
 			BindingContext = vm;
-			statusTrad["En cours de création"] = "in creation";
 			statusTrad["En attente de confirmation"] = "waiting for confirmation";
 			statusTrad["En cours de préparation"] = "in preparation";
 			statusTrad["A récupérer"] = "to be collected";
@@ -48,6 +47,11 @@ namespace BackOffice
                 await _cartService.PatchCart(cart.CartId, new PatchCart{ status = statusTrad[status] });
 				await viewModel.LoadCarts();
 			}
+		}
+
+		private async void UpdateCarts(object sender, EventArgs e)
+        {
+			await viewModel.LoadCarts();
 		}
     }
 }
