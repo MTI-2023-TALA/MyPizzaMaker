@@ -12,6 +12,7 @@ namespace BackOffice.Service
         {
             builder.Services.AddSingleton<IngredientService>();
             builder.Services.AddSingleton<CartService>();
+            builder.Services.AddSingleton<StatService>();
 
             return builder;
         }

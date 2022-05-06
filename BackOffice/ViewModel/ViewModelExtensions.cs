@@ -12,6 +12,7 @@ namespace BackOffice.ViewModal
         {
             builder.Services.AddTransient<IngredientModel>();
             builder.Services.AddTransient<CartModel>();
+            builder.Services.AddTransient<StatsModel>();
             builder.Services.AddSingleton<ShellViewModel>();
             return builder;
         }

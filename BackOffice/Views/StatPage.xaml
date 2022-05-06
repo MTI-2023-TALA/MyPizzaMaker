@@ -2,10 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BackOffice.StatPage"
-             Title="Statistiques">
+             xmlns:viewmodels="clr-namespace:BackOffice.ViewModal"
+             xmlns:dto="clr-namespace:backend.Dto"
+             x:DataType="viewmodels:StatsModel"
+             Title="Statistiques"
+             x:Name="self">
     <StackLayout>
-        <Label Text="Welcome to Stat Page!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Commande journalière : " FontSize="Large"></Label>
+                <Label Text="{Binding Daily}" FontSize="Large"></Label>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Commande hebdomadaire : " FontSize="Large"></Label>
+                <Label Text="{Binding Weekly}" FontSize="Large"></Label>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Commande mensuelle : " FontSize="Large"></Label>
+                <Label Text="{Binding Monthly}" FontSize="Large"></Label>
+            </HorizontalStackLayout>
+            <Label Text="Utilisation des ingrédients : " FontSize="Large"></Label>
+            <CollectionView ItemsSource="{Binding Ingredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:IngredientStat">
+                        <VerticalStackLayout Spacing="25" Padding="30">
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding name}" FontSize="Medium"></Label>
+                                <Label Text=":" FontSize="Medium"></Label>
+                                <Label Text="{Binding count}" FontSize="Medium"></Label>
+                            </HorizontalStackLayout> 
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
     </StackLayout>
 </ContentPage>
