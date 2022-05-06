@@ -2,8 +2,9 @@ namespace FrontPizza;
 
 public partial class IngredientPage : ContentPage
 {
-	public IngredientPage()
+	public IngredientPage(MainViewModel vm)
 	{
 		InitializeComponent();
+		BindingContext = vm;
 	}
 }
