@@ -42,6 +42,7 @@ namespace BackOffice.ViewModal
             Weekly = await _statService.GetStats("weekly");
             Monthly = await _statService.GetStats("monthly");
             var tmp = await _statService.GetIngredientsStats();
+            tmp = tmp.OrderByDescending(i => i.count).ToList();
             Ingredients.ReplaceRange(tmp);
         }
 
