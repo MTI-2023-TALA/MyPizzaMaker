@@ -9,7 +9,9 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PizzaMakerDatabase", "Pizza
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackOffice", "BackOffice\BackOffice.csproj", "{FC612A92-25F3-4992-811E-D3823D1BC3B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backendTest", "backendTest\backendTest.csproj", "{E6E7C6D0-4073-49C0-AB4D-E8A800AC17BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backendTest", "backendTest\backendTest.csproj", "{E6E7C6D0-4073-49C0-AB4D-E8A800AC17BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontPizza", "FrontPizza\FrontPizza.csproj", "{60838282-1967-42B2-880E-9A140C5D4D9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,12 @@ Global
 		{E6E7C6D0-4073-49C0-AB4D-E8A800AC17BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6E7C6D0-4073-49C0-AB4D-E8A800AC17BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6E7C6D0-4073-49C0-AB4D-E8A800AC17BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60838282-1967-42B2-880E-9A140C5D4D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60838282-1967-42B2-880E-9A140C5D4D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60838282-1967-42B2-880E-9A140C5D4D9F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{60838282-1967-42B2-880E-9A140C5D4D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60838282-1967-42B2-880E-9A140C5D4D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60838282-1967-42B2-880E-9A140C5D4D9F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
