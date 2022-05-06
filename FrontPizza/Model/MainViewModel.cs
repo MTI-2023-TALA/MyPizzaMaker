@@ -29,6 +29,17 @@ namespace FrontPizza.Model
             }
         }
 
+        public async Task AddPizza(string name, List<int> IngredientIds)
+        {
+            backend.Dto.AddPizza pizza = new backend.Dto.AddPizza
+            {
+                IngredientIds = IngredientIds,
+                Name = name
+            };
+
+            await _cartService.AddPizzaToCart(Id, pizza);
+        }
+
         public MainViewModel(int Id)
         {
             _ingredientService = new IngredientService();

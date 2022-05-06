@@ -2,10 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FrontPizza.IngredientPage"
-             Title="IngredientPage">
-    <StackLayout>
-        <Label Text="Welcome to IngredientPage!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-    </StackLayout>
+             xmlns:viewmodels="clr-namespace:FrontPizza.Model"
+             xmlns:dto="clr-namespace:backend.Dto"
+             Title="IngredientPage"
+             x:DataType="viewmodels:MainViewModel">
+
+    <FlexLayout JustifyContent="Center" AlignContent="Center">
+        <ScrollView>
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Votre numéro est :" />
+                    <Label Text="{Binding Id}"/>
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding Ingredients}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:Ingredient">
+                            <HorizontalStackLayout HeightRequest="50">
+                                <Button Text="{Binding Name}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                BackgroundColor="LightGrey"
+                                TextColor="Black"
+                                Clicked="AddIngredient"/>
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button Text="Ajouter votre pizza" Clicked="AddPizza"></Button>
+                <Button Text="Confirmer votre commande" Clicked="ConfirmCommand"></Button>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </FlexLayout>
+
 </ContentPage>
