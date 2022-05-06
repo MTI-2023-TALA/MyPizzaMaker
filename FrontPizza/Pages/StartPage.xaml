@@ -3,15 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FrontPizza.StartPage"
              Title="StartPage">
-    <StackLayout>
-        <Label Text="Welcome to StartPage"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-        <Button VerticalOptions="Center"
+    <Grid RowSpacing="25" RowDefinitions="Auto,Auto,*" Padding="{OnPlatform Default='30' }">
+        <Image Source="{AppThemeBinding Light=pizza.png}"
+               Grid.Row="0"
+               SemanticProperties.Description=".NET Podcast application logo"
+               WidthRequest="250"
+               HeightRequest="310"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        <Button Grid.Row="1"
                 HorizontalOptions="Center"
-                Text="Créer une commandes"
+                Text="Créer une commande"
                 Clicked="StartCommand"
                 ></Button>
         
-    </StackLayout>
+    </Grid>
 </ContentPage>

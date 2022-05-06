@@ -5,6 +5,7 @@
         public static MauiApp CreateMauiApp()
         {
             CategoryHelper.PopulateMap();
+            ApiHelper.InitializeClient();
 
             var builder = MauiApp.CreateBuilder();
             builder

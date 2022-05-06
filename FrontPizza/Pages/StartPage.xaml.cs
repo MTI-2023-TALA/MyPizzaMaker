@@ -2,14 +2,16 @@ namespace FrontPizza;
 
 public partial class StartPage : ContentPage
 {
+	private CartService _cartService;
 	public StartPage()
 	{
 		InitializeComponent();
+		_cartService = new CartService();
 	}
 
-    private void StartCommand(object sender, EventArgs e)
+    private async void StartCommand(object sender, EventArgs e)
     {
-		// TODO: Get cartId and send it;
-		Navigation.PushAsync(new IngredientPage());
+		backend.Dto.Cart cart = await _cartService.CreateCart();
+		await Navigation.PushAsync(new IngredientPage(new MainViewModel(cart.Id)));
     }
 }
