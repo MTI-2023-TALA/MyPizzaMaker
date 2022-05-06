@@ -83,7 +83,7 @@ namespace backendTest.repository
         }
 
         [Fact]
-        public async void GetAllIngredientTest()
+        public void GetAllIngredientTest()
         {
             PopulateDB();
 
@@ -117,7 +117,7 @@ namespace backendTest.repository
         }
 
         [Fact]
-        public async void GetIngredientWithCategoryTest()
+        public void GetIngredientWithCategoryTest()
         {
             PopulateDB();
 
@@ -127,7 +127,7 @@ namespace backendTest.repository
         }
 
         [Fact]
-        public async void GetIngredientWithBadCategoryTest()
+        public void GetIngredientWithBadCategoryTest()
         {
             PopulateDB();
 
@@ -168,7 +168,7 @@ namespace backendTest.repository
         [InlineData("dessert", true)]
         [InlineData("", false)]
         [InlineData("badCategory", false)]
-        public async void ValidateIngredientCategory(string category, bool expected)
+        public void ValidateIngredientCategoryTest(string category, bool expected)
         {
             bool isCorrectCategory = _ingredientRepository.ValidateIngredientCategory(category);
             Assert.Equal(expected, isCorrectCategory);
