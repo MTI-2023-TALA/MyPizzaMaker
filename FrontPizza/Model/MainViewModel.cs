@@ -40,6 +40,17 @@ namespace FrontPizza.Model
             await _cartService.AddPizzaToCart(Id, pizza);
         }
 
+        public async Task ConfirmCommand()
+        {
+            backend.Dto.UpdateCart updateCart = new backend.Dto.UpdateCart
+            {
+                Status = "waiting for confirmation"
+            };
+
+            backend.Dto.Cart cart = await _cartService.UpdateCart(Id, updateCart);
+            Console.WriteLine(cart);
+        }
+
         public MainViewModel(int Id)
         {
             _ingredientService = new IngredientService();

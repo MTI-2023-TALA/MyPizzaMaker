@@ -54,11 +54,30 @@ namespace FrontPizza.Service
             string json = JsonSerializer.Serialize(addPizza);
             HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            using(HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
+            using(HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(url, httpContent))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
+                    string result = await response.Content.ReadAsStringAsync();
+                    return result == "true";
+                } else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task<backend.Dto.Cart> UpdateCart(int id, backend.Dto.UpdateCart updateCart)
+        {
+            string url = Config.BaseWeb + "cart/" + id;
+            string json = JsonSerializer.Serialize(updateCart);
+            HttpContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.PatchAsync(url, httpContent))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<backend.Dto.Cart>();
                 } else
                 {
                     throw new Exception(response.ReasonPhrase);

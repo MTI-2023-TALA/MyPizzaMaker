@@ -55,6 +55,7 @@ public partial class IngredientPage : ContentPage
 			return;
         }
 
+		await viewModel.ConfirmCommand();
 		await Navigation.PushAsync(new StatusPage(new StatusViewModel(viewModel.Id)));
     }
 }
