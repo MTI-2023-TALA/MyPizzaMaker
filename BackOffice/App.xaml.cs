@@ -6,8 +6,6 @@
         {
             InitializeComponent();
 
-            Helper.ApiHelper.InitializeClient();
-
             MainPage = new AppShell();
 
             App.Current.UserAppTheme = AppTheme.Light;

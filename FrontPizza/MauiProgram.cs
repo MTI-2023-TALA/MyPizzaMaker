@@ -4,6 +4,8 @@
     {
         public static MauiApp CreateMauiApp()
         {
+            ApiHelper.InitializeClient();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()

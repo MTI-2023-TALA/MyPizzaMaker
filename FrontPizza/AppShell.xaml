@@ -6,6 +6,16 @@
     xmlns:pages="clr-namespace:FrontPizza"
     Shell.FlyoutBehavior="Disabled">
 
+    <NavigationPage.TitleView>
+        <VerticalStackLayout>
+            <Label VerticalOptions="Center" 
+                   HorizontalOptions="Center" 
+                   Text="My Pizza Maker" 
+                   FontSize="Large" />
+            
+        </VerticalStackLayout>
+    </NavigationPage.TitleView>
+    
     <ShellContent
         Title="Hello, World!"
         ContentTemplate="{DataTemplate pages:StartPage}"
