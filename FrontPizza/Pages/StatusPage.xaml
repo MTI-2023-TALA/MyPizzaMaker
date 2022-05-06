@@ -28,6 +28,7 @@
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
                 <Button Text="Actualiser" Clicked="Reload" />
+                <Button Text="Commander une nouvelle pizza" Clicked="Restart" />
             </HorizontalStackLayout>
             <CollectionView ItemsSource="{Binding Pizzas}">
                 <CollectionView.ItemsLayout>

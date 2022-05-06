@@ -21,4 +21,9 @@ public partial class StatusPage : ContentPage
     {
 		await viewModel.LoadCart();
     }
+
+	private async void Restart(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new StartPage());
+	}
 }

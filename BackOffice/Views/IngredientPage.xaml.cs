@@ -29,7 +29,14 @@ namespace BackOffice
         {
             CreateIngredient createIngredient = new CreateIngredient();
             createIngredient.Name = name.Text;
-            createIngredient.Category = CategoryHelper.TranslateCategory((string)category.ItemsSource[category.SelectedIndex]);
+            try
+            {
+                createIngredient.Category = CategoryHelper.TranslateCategory((string)category.ItemsSource[category.SelectedIndex]);
+            }
+            catch (Exception ep)
+            {
+                return;
+            }
             createIngredient.IsAvailable = isAvailable.IsChecked;
 
             name.Text = "";

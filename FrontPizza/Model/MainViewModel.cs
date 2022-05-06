@@ -48,7 +48,6 @@ namespace FrontPizza.Model
             };
 
             backend.Dto.Cart cart = await _cartService.UpdateCart(Id, updateCart);
-            Console.WriteLine(cart);
         }
 
         public MainViewModel(int Id)
