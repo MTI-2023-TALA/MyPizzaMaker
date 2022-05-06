@@ -14,16 +14,12 @@ namespace BackOffice.ViewModal
         public ObservableRangeCollection<Cart> WaitingCarts { get; set; }
         public ObservableRangeCollection<Cart> PreparationCarts { get; set; }
         public ObservableRangeCollection<Cart> CollectedCarts { get; set; }
-        public ObservableRangeCollection<Cart> ServedCarts { get; set; }
-        public ObservableRangeCollection<Cart> CancelledCarts { get; set; }
 
         public async Task LoadCarts()
         {
             WaitingCarts.Clear();
             PreparationCarts.Clear();
             CollectedCarts.Clear();
-            ServedCarts.Clear();
-            CancelledCarts.Clear();
 
             List<Cart> Carts = await _cartService.LoadCarts();
 
@@ -42,15 +38,6 @@ namespace BackOffice.ViewModal
                 {
                     CollectedCarts.Add(cart);
                 }
-                else if (cart.Status == "served")
-                {
-                    ServedCarts.Add(cart);
-                }
-                else if (cart.Status == "cancelled")
-                {
-                    CancelledCarts.Add(cart);
-                }
-
             }
         }
 
@@ -60,8 +47,6 @@ namespace BackOffice.ViewModal
             WaitingCarts = new ObservableRangeCollection<Cart>();
             PreparationCarts = new ObservableRangeCollection<Cart>();
             CollectedCarts = new ObservableRangeCollection<Cart>();
-            ServedCarts = new ObservableRangeCollection<Cart>();
-            CancelledCarts = new ObservableRangeCollection<Cart>();
         }
     }
 }
